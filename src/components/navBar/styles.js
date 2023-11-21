@@ -8,11 +8,12 @@ export const NavContainer = styled.nav`
 export const LeftWrapper = styled.div`
   display: flex;
   justify-content: flex-start;
+  align-items: center;
   flex: 1;
   font-size: 10;
 `;
 
-export const CenterWrapper = styled.h1`
+export const CenterWrapper = styled.div`
   flex: 1;
   display: flex;
   justify-content: center;
@@ -21,6 +22,7 @@ export const CenterWrapper = styled.h1`
 export const RightWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   flex: 1;
   font-size: 10;
 `;
@@ -44,6 +46,6 @@ export const SearchBar = styled.div`
   border: 0.5px solid gray;
 `;
 
-export const Logo = styled.h4`
+export const Logo = styled.h2`
   margin: 0;
 `;

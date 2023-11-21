@@ -1,4 +1,5 @@
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import Badge from "@mui/material/Badge";
 import SearchIcon from "@mui/icons-material/Search";
 import {
   NavContainer,
@@ -16,12 +17,10 @@ const NavBar = () => {
     <NavContainer>
       <LeftWrapper>
         <NavItem>EN</NavItem>
-        <NavItem>
-          <SearchBar>
-            <Input placeholder="Search" />
-            <SearchIcon style={{ color: "gray" }} />
-          </SearchBar>
-        </NavItem>
+        <SearchBar>
+          <Input placeholder="Search" />
+          <SearchIcon style={{ color: "gray" }} />
+        </SearchBar>
       </LeftWrapper>
       <CenterWrapper>
         <Logo>Bag Boutique.</Logo>
@@ -30,7 +29,9 @@ const NavBar = () => {
         <NavItem>SIGN IN</NavItem>
         <NavItem>REGISTER</NavItem>
         <NavItem>
-          <ShoppingCartOutlinedIcon />
+          <Badge badgeContent={4} color="primary">
+            <ShoppingCartOutlinedIcon color="action" />
+          </Badge>
         </NavItem>
       </RightWrapper>
     </NavContainer>
