@@ -6,6 +6,7 @@ import { ADD_TO_CART } from "../../../actions";
 
 import styled from "styled-components";
 import { findItemFromID } from "../../../utils";
+import BtnAddCart from "../../common/btnAddCart";
 
 export const Container = styled.div`
   display: flex;
@@ -44,8 +45,9 @@ const ItemPage = ({ items }) => {
   const dispatch = useDispatch();
 
   const addToCartHandler = () => {
-    dispatch({ type: ADD_TO_CART, newItem: findItemFromID(id, items) });
+    dispatch({ type: ADD_TO_CART, item: findItemFromID(id, items) });
   };
+
   return (
     <Container>
       <Image src={itemDetails.image} alt={itemDetails.title} />
@@ -57,15 +59,7 @@ const ItemPage = ({ items }) => {
           <Rate disabled allowHalf defaultValue={itemDetails.rating.rate} />
           <RatingCount>{`(${itemDetails.rating.count}) reviews`}</RatingCount>
         </Rating>
-        <Button
-          type="primary"
-          icon={<ShoppingCartOutlined />}
-          shape="round"
-          onClick={addToCartHandler}
-          // style={}
-        >
-          Add to Cart
-        </Button>
+        <BtnAddCart addToCartHandler={addToCartHandler} />
       </ItemInfo>
     </Container>
   );

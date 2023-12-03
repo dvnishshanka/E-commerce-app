@@ -1,4 +1,4 @@
-import Banner from "../../common/Banner";
+import Banner from "../../common/banner";
 import Item from "../../common/itemCard";
 import { BannerImgWrapper, ItemsWrapper } from "./styles";
 

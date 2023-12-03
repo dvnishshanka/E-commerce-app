@@ -13,12 +13,3 @@ export const ItemDescription = styled.div`
   position: absolute;
   bottom: 5%;
 `;
-
-export const QtyChanger = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #1677ff;
-  border-radius: 32px;
-  width: 100%;
-`;

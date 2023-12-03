@@ -1,14 +1,11 @@
-import {
-  ShoppingCartOutlined,
-  PlusCircleOutlined,
-  MinusCircleOutlined,
-} from "@ant-design/icons";
-import { Button, Card } from "antd";
-import { ItemDescription, Image, QtyChanger } from "./styles";
+import { Card } from "antd";
+import { ItemDescription, Image } from "./styles";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { ADD_TO_CART } from "./../../../actions/ActionTypes";
-import { findItemFromID } from "../../../utils";
+import { useDispatch, useSelector } from "react-redux";
+import { ADD_TO_CART, REMOVE_FROM_CART } from "./../../../actions/ActionTypes";
+import { findItemFromID, getOrderedItemQty } from "../../../utils";
+import BtnAddCart from "../btnAddCart";
+import QtyChanger from "../qtyChanger";
 
 const ItemCard = ({
   items,
@@ -21,8 +18,16 @@ const ItemCard = ({
 }) => {
   const dispatch = useDispatch();
 
+  const noOfItems = useSelector((state) => {
+    return getOrderedItemQty(id, state.cart.cartItems);
+  });
+
   const addToCartHandler = () => {
-    dispatch({ type: ADD_TO_CART, newItem: findItemFromID(id, items) });
+    dispatch({ type: ADD_TO_CART, item: findItemFromID(id, items) });
+  };
+
+  const removeFromCartHandler = () => {
+    dispatch({ type: REMOVE_FROM_CART, item: findItemFromID(id, items) });
   };
 
   return (
@@ -40,29 +45,16 @@ const ItemCard = ({
       <ItemDescription>
         {title && <h4>{title}</h4>}
         {price && <p>{`€ ${Number(price).toFixed(2)}`}</p>}
-        <Button
-          type="primary"
-          icon={<ShoppingCartOutlined />}
-          shape="round"
-          onClick={addToCartHandler}
-        >
-          Add to Cart
-        </Button>
-        <QtyChanger>
-          <Button
-            type="primary"
-            shape="circle"
-            icon={<MinusCircleOutlined />}
-            onClick={addToCartHandler}
+
+        {noOfItems > 0 ? (
+          <QtyChanger
+            removeFromCartHandler={removeFromCartHandler}
+            addToCartHandler={addToCartHandler}
+            noOfItems={noOfItems}
           />
-          <p style={{ fontWeight: "bold", color: "white" }}>Added to cart</p>
-          <Button
-            type="primary"
-            shape="circle"
-            icon={<PlusCircleOutlined />}
-            onClick={addToCartHandler}
-          />
-        </QtyChanger>
+        ) : (
+          <BtnAddCart addToCartHandler={addToCartHandler} />
+        )}
       </ItemDescription>
     </Card>
   );

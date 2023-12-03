@@ -3,19 +3,19 @@ import initialState from "./InitialState";
 import { findItemIndexFromID } from "../utils";
 
 export const cartReducer = (state = initialState, action) => {
-  if (action.type === ADD_TO_CART) {
-    // Find index if the same product is added to cart earlier
-    const itemIndex = findItemIndexFromID(action.newItem.id, state.cartItems);
+  // Find index of the product in the cart array
+  const itemIndex = findItemIndexFromID(action.item?.id, state.cartItems);
 
+  if (action.type === ADD_TO_CART) {
     // If the item added is not in the cart
     if (itemIndex < 0)
       return {
         ...state,
-        cartItems: [...state.cartItems, { ...action.newItem, qty: 1 }],
+        cartItems: [...state.cartItems, { ...action.item, qty: 1 }],
       };
-    // If the item added is already in the cart
+    // If the item is already in the cart
     else {
-      const newItem = {
+      const updatedItem = {
         ...state.cartItems[itemIndex],
         qty: state.cartItems[itemIndex].qty + 1,
       };
@@ -23,12 +23,29 @@ export const cartReducer = (state = initialState, action) => {
       return {
         ...state,
         cartItems: state.cartItems.map((el, index) =>
-          index === itemIndex ? newItem : el
+          index === itemIndex ? updatedItem : el
         ),
       };
     }
   } else if (action.type === REMOVE_FROM_CART) {
-    return [...state, action.newItem];
+    // If the item is in the cart
+    if (itemIndex >= 0) {
+      const updatedItem = {
+        ...state.cartItems[itemIndex],
+        qty:
+          state.cartItems[itemIndex].qty > 0
+            ? state.cartItems[itemIndex].qty - 1
+            : 0,
+      };
+
+      return {
+        ...state,
+        cartItems: state.cartItems.map((el, index) =>
+          index === itemIndex ? updatedItem : el
+        ),
+      };
+    }
+    return [...state, action.item];
   }
   return state;
 };
