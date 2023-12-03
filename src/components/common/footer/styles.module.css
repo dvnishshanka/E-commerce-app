@@ -1,0 +1,5 @@
+.socialMedia {
+  &:hover {
+    color: lightgray;
+  }
+}

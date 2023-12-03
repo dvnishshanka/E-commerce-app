@@ -1,18 +1,24 @@
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { Badge, Input } from "antd";
 import { Menu } from "antd";
-import { Logo } from "./styles";
+import Logo from "../logo";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { getTotalItemQty } from "../../../utils";
 
 const { Search } = Input;
 
 const NavBar = () => {
+  const cartItemQty = useSelector((state) => {
+    console.log("state", state);
+    return getTotalItemQty(state.cart.cartItems);
+  });
   const onSearch = (value, _e, info) => console.log(info?.source, value);
 
   const menuItems = [
     {
       key: "logo",
-      label: <Logo>Bag Boutique.</Logo>,
+      label: <Logo />,
       style: {
         alignItems: "center",
       },
@@ -43,7 +49,7 @@ const NavBar = () => {
     {
       key: "cart",
       icon: (
-        <Badge count={4} size="small" color="blue">
+        <Badge count={cartItemQty} size="small" color="blue">
           <ShoppingCartOutlined style={{ fontSize: "1.4rem" }} />
         </Badge>
       ),

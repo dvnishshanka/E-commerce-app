@@ -1,16 +1,42 @@
 import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { useEffect, useState } from "react";
-import RootPage from "./pages/Root";
-import HomePage from "./pages/home";
-import ItemPage from "./pages/itemPage";
-import ErrorPage from "./pages/Error";
+import RootPage from "./components/pages/Root";
+import HomePage from "./components/pages/home";
+import ItemPage from "./components/pages/itemPage";
+import ErrorPage from "./components/pages/Error";
+import axios from "axios";
+import { findItemFromID } from "./utils";
 
 function App() {
   const [cart, setCart] = useState([]);
+  const [items, setItems] = useState([]);
 
-  const addToCart = (newItem) => {
-    setCart((prevState) => [...prevState, newItem]);
+  useEffect(() => {
+    axios
+      .get("https://fakestoreapi.com/products")
+      .then((response) => {
+        setItems(response.data);
+        // console.error(items);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
+  const addToCart = (id) => {
+    const addedItem = findItemFromID(id, items);
+    addedItem?.quantity
+      ? (addedItem.quantity = addedItem.quantity + 1)
+      : (addedItem.quantity = 0);
+    console.log("added item", addedItem);
+    setCart((prevState) => {
+      // Check whether the item selected is already in the cart
+      const selectedItem = findItemFromID(id, cart);
+      // if (selectedItem)
+      //   return [...prevState, prevState]
+      return [...prevState, { addedItem }];
+    });
   };
 
   const router = createBrowserRouter([
@@ -21,22 +47,18 @@ function App() {
       children: [
         {
           path: "/",
-          element: <HomePage cart={cart} addToCart={addToCart} />,
+          element: <HomePage items={items} addToCart={addToCart} />,
         },
         {
           path: "/items/:id",
-          element: <ItemPage />,
+          element: <ItemPage items={items} />,
         },
-        // {
-        //   path: "/register",
-        //   element: ,
-        // },
       ],
     },
   ]);
 
   useEffect(() => {
-    console.log(cart);
+    // console.log(cart);
   }, [cart]);
 
   return <RouterProvider router={router}></RouterProvider>;

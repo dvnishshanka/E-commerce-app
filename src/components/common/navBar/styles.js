@@ -45,7 +45,3 @@ export const SearchBar = styled.div`
   align-items: center;
   border: 0.5px solid gray;
 `;
-
-export const Logo = styled.h2`
-  margin: 0;
-`;

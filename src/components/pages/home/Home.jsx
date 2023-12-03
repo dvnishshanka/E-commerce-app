@@ -1,23 +1,8 @@
-import Banner from "../../components/Banner";
-import Item from "../../components/item";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import Banner from "../../common/Banner";
+import Item from "../../common/itemCard";
 import { BannerImgWrapper, ItemsWrapper } from "./styles";
 
-const Home = ({ addToCart }) => {
-  const [items, setItems] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get("https://fakestoreapi.com/products")
-      .then((response) => {
-        setItems(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
-
+const Home = ({ items }) => {
   return (
     <>
       <BannerImgWrapper>
@@ -27,7 +12,7 @@ const Home = ({ addToCart }) => {
         {items.map((item) => {
           return (
             <Item
-              addToCart={addToCart}
+              items={items}
               key={item.id}
               id={item.id}
               title={item.title}
