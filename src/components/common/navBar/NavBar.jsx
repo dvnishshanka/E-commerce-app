@@ -40,7 +40,7 @@ const NavBar = () => {
     },
     {
       key: "signIn",
-      label: "SIGN IN",
+      label: <Link to={"/sign-in"}>SIGN IN</Link>,
       style: {
         alignItems: "center",
       },

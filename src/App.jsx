@@ -7,6 +7,8 @@ import ItemPage from "./components/pages/itemPage";
 import ErrorPage from "./components/pages/Error";
 import axios from "axios";
 import { findItemFromID } from "./utils";
+import SignIn from "./components/pages/signIn";
+import SignUp from "./components/pages/signUp";
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -52,6 +54,14 @@ function App() {
         {
           path: "/items/:id",
           element: <ItemPage items={items} />,
+        },
+        {
+          path: "/sign-in",
+          element: <SignIn />,
+        },
+        {
+          path: "/register",
+          element: <SignUp />,
         },
       ],
     },
