@@ -1,17 +1,16 @@
-import { Button } from "antd";
 import { ShoppingCartOutlined } from "@ant-design/icons";
+import { PrimaryBtn } from "../button";
 
 const BtnAddCart = ({ addToCartHandler }) => {
   return (
-    <Button
+    <PrimaryBtn
       type="primary"
       icon={<ShoppingCartOutlined />}
-      shape="round"
       onClick={addToCartHandler}
-      // style={}
+      style={{ width: "100%" }}
     >
       Add to Cart
-    </Button>
+    </PrimaryBtn>
   );
 };
 

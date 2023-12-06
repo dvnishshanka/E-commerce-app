@@ -1,78 +1,119 @@
-import { Button, Form, Input } from "antd";
+import { Form, message } from "antd";
 import {
   LABEL_SIGN_IN,
   LABEL_REGISTER_NOW,
   LABEL_WELCOME_BACK,
-  LABEL_USERNAME,
   LABEL_PASSWORD,
+  INCORRECT_EMAIL_OR_PASSWORD,
+  FIREBASE_ERR_INVALID_CREDENTIAL,
+  SOMETHING_WENT_WRONG,
 } from "../../../constants/AppConstants";
-import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Title } from "./styles";
+import { auth } from "./../../../firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { PrimaryBtn } from "../../common/button";
+import { FormInput, FormInputPassword } from "../../common/input";
 
 const SignIn = () => {
-  const onFinish = (values) => {
-    console.log("Success:", values);
+  const navigate = useNavigate();
+  const [form] = Form.useForm();
+  const [messageApi, contextHolder] = message.useMessage();
+
+  const onSubmit = (values) => {
+    signInWithEmailAndPassword(auth, values.email, values.password)
+      .then((userCredential) => {
+        // Signed in
+        // console.log("userCredential:", userCredential);
+        // const user = userCredential.user;
+        navigate("/");
+      })
+      .catch((error) => {
+        const errorMessage =
+          error.code === FIREBASE_ERR_INVALID_CREDENTIAL
+            ? INCORRECT_EMAIL_OR_PASSWORD
+            : SOMETHING_WENT_WRONG;
+
+        messageApi.open({
+          type: "error",
+          content: errorMessage,
+        });
+      });
   };
 
+  // When form submission failed
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+    messageApi.open({
+      type: "error",
+      content:
+        errorInfo?.errorFields[0]?.errors[0] || INCORRECT_EMAIL_OR_PASSWORD,
+    });
   };
 
   return (
-    <Form
-      name="basic"
-      style={{
-        maxWidth: "400px",
-        margin: " 50px auto",
-        border: "2px solid light-gray",
-        borderRadius: "5px",
-        padding: "10px 20px ",
-      }}
-      initialValues={{ remember: true }}
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
-      layout="vertical"
-    >
-      <Title>{LABEL_WELCOME_BACK}</Title>
-      <Form.Item
-        name="username"
-        label={LABEL_USERNAME}
-        rules={[{ required: true, message: "Please input your Username!" }]}
+    <>
+      {contextHolder}
+      <Form
+        form={form}
+        style={{
+          maxWidth: "400px",
+          margin: " 50px auto",
+          border: "2px solid light-gray",
+          borderRadius: "5px",
+          padding: "10px 20px ",
+        }}
+        onFinish={onSubmit}
+        onFinishFailed={onFinishFailed}
+        layout="vertical"
       >
-        <Input
-          prefix={<UserOutlined className="site-form-item-icon" />}
-          placeholder="Username"
-        />
-      </Form.Item>
-      <Form.Item
-        name="password"
-        label={LABEL_PASSWORD}
-        rules={[{ required: true, message: "Please input your Password!" }]}
-      >
-        <Input
-          prefix={<LockOutlined className="site-form-item-icon" />}
-          type="password"
-          placeholder="Password"
-        />
-      </Form.Item>
+        <Title>{LABEL_WELCOME_BACK}</Title>
 
-      <Form.Item>
-        <Button
-          type="primary"
-          htmlType="submit"
-          style={{ width: "100%", background: "#1a1a1a", fontWeight: "400" }}
+        <Form.Item
+          name="email"
+          label="E-mail"
+          rules={[
+            {
+              type: "email",
+              message: "The input is not valid E-mail!",
+            },
+            {
+              required: true,
+              message: "Please input your E-mail!",
+            },
+          ]}
         >
-          {LABEL_SIGN_IN}
-        </Button>
-      </Form.Item>
-      <Form.Item>
-        <p>
-          Don't have an account?
-          <Link to={"/register"}> {LABEL_REGISTER_NOW}</Link>
-        </p>
-      </Form.Item>
-    </Form>
+          <FormInput />
+        </Form.Item>
+        <Form.Item
+          name="password"
+          label={LABEL_PASSWORD}
+          rules={[{ required: true, message: "Please input your Password!" }]}
+        >
+          <FormInputPassword />
+        </Form.Item>
+        <Form.Item shouldUpdate>
+          {() => (
+            <PrimaryBtn
+              type="primary"
+              htmlType="submit"
+              disabled={
+                !form.isFieldsTouched(true) ||
+                !!form.getFieldsError().filter(({ errors }) => errors.length)
+                  .length
+              }
+            >
+              {LABEL_SIGN_IN}
+            </PrimaryBtn>
+          )}
+        </Form.Item>
+        <Form.Item>
+          <p>
+            Don't have an account?
+            <Link to={"/register"}> {LABEL_REGISTER_NOW}</Link>
+          </p>
+        </Form.Item>
+      </Form>
+    </>
   );
 };
 

@@ -1,14 +1,17 @@
 import { Container } from "./styles";
-import { Button } from "antd";
-import { PlusCircleOutlined, MinusCircleOutlined } from "@ant-design/icons";
+import {
+  PlusOutlined,
+  ShoppingCartOutlined,
+  MinusOutlined,
+} from "@ant-design/icons";
+import { PrimaryBtn } from "../button";
 
 const QtyChanger = ({ removeFromCartHandler, addToCartHandler, noOfItems }) => {
   return (
     <Container>
-      <Button
+      <PrimaryBtn
         type="primary"
-        shape="circle"
-        icon={<MinusCircleOutlined />}
+        icon={<MinusOutlined />}
         onClick={removeFromCartHandler}
       />
       <p
@@ -16,12 +19,12 @@ const QtyChanger = ({ removeFromCartHandler, addToCartHandler, noOfItems }) => {
           fontWeight: "bold",
         }}
       >
-        {noOfItems} Nos
+        {noOfItems} Nos in{" "}
+        <ShoppingCartOutlined style={{ fontSize: "1.2rem" }} />
       </p>
-      <Button
+      <PrimaryBtn
         type="primary"
-        shape="circle"
-        icon={<PlusCircleOutlined />}
+        icon={<PlusOutlined />}
         onClick={addToCartHandler}
       />
     </Container>

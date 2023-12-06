@@ -4,3 +4,14 @@
   margin: 0;
   padding: 0;
 }
+
+a {
+  color: #6328e0;
+  font-weight: 700;
+}
+
+a:hover {
+  color: #6328e0;
+  font-weight: 700;
+  text-decoration: underline;
+}

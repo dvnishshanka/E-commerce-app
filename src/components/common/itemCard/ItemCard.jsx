@@ -45,7 +45,6 @@ const ItemCard = ({
       <ItemDescription>
         {title && <h4>{title}</h4>}
         {price && <p>{`€ ${Number(price).toFixed(2)}`}</p>}
-
         {noOfItems > 0 ? (
           <QtyChanger
             removeFromCartHandler={removeFromCartHandler}
