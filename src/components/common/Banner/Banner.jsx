@@ -1,18 +1,33 @@
 import { PrimaryBtn } from "../button";
-import { BannerWrapper, InfoWrapper } from "./styles";
+import {
+  BannerWrapper,
+  InfoWrapper,
+  ImgWrapper,
+  Title,
+  Description,
+  SubTitle,
+} from "./styles";
+import jewelleryBanner from "../../../assets/images/jewellery-banner.jpg";
+import { Link } from "react-router-dom";
+import { ArrowRightOutlined } from "@ant-design/icons";
 
-const Banner = () => {
+const Banner = ({ bannerData }) => {
   return (
-    <BannerWrapper>
-      {/* <ImgWrapper
-    //     src="https://img.freepik.com/free-photo/shopping-concept-close-up-portrait-young-beautiful-attractive-redhair-girl-smiling-looking-camera_1258-119094.jpg?w=1380&t=st=1700607016~exp=1700607616~hmac=7bb4c8f68fbbe8339e3ff761ca03c61c0de1bcb229c85cd53f9423ee4a8c6082"
-    //     alt="banner with blue handbag"
-    //   ></ImgWrapper> */}
+    <BannerWrapper
+      style={{
+        backgroundColor: bannerData.bgColor,
+        color: bannerData.txtColor,
+      }}
+    >
       <InfoWrapper>
-        <h1>LET'S EXPLORE UNIQUE CLOTHES.</h1>
-        <p>Live for Influential and Innovative fashion!</p>
-        <PrimaryBtn>SHOP NOW</PrimaryBtn>
+        <Title> {bannerData.title}</Title>
+        <SubTitle> {bannerData.subTitle}</SubTitle>
+        <Description>{bannerData.caption}</Description>
+        <Link style={{ fontSize: "1.2rem", color: bannerData.txtColor }}>
+          {bannerData.btnText} <ArrowRightOutlined />
+        </Link>
       </InfoWrapper>
+      <ImgWrapper src={bannerData.image} alt={bannerData.name}></ImgWrapper>
     </BannerWrapper>
   );
 };

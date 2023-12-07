@@ -7,7 +7,7 @@ const defaultTheme = {
     green: "#00875a",
     white: "#efeff0",
     purple: "#6328e0",
-    yellow: "#c0ff2d",
+    yellow: "rgb(255, 105, 0)",
   },
 };
 

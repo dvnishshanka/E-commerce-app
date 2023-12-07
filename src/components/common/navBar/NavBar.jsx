@@ -73,7 +73,7 @@ const NavBar = () => {
         mode="horizontal"
         items={menuItems}
         style={{ display: "flex" }}
-        theme="dark"
+        // theme="dark"
       ></Menu>
     </nav>
   );

@@ -1,13 +1,21 @@
+import { Carousel } from "antd";
 import Banner from "../../common/banner";
 import Item from "../../common/itemCard";
-import { BannerImgWrapper, ItemsWrapper } from "./styles";
+import { ItemsWrapper } from "./styles";
+import { bannerData } from "./BannerData";
 
 const Home = ({ items }) => {
   return (
     <>
-      <BannerImgWrapper>
-        <Banner />
-      </BannerImgWrapper>
+      <Carousel
+      // autoplay
+      // autoplaySpeed={3000}
+      // speed={600}
+      >
+        {bannerData.map((el, index) => {
+          return <Banner key={index} bannerData={el} />;
+        })}
+      </Carousel>
       <ItemsWrapper>
         {items.map((item) => {
           return (

@@ -5,7 +5,7 @@ import defaultTheme from "../../theme";
 
 const Root = () => {
   return (
-    <div>
+    <div style={{ minHeight: "100vh" }}>
       <NavBar />
       <main
         style={{
