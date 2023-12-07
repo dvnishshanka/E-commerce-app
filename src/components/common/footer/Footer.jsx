@@ -46,7 +46,7 @@ const Footer = () => {
         </SocialMedia>
       </InfoColumn>
       <InfoColumn style={{ flex: "1" }}>
-        <Title>PRODUCTS</Title>
+        <Title> PRODUCTS</Title>
         <ul style={listStyles}>
           <li>Product 1</li>
           <li>Product 1</li>

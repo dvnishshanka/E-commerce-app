@@ -9,6 +9,7 @@ import axios from "axios";
 import { findItemFromID } from "./utils";
 import SignIn from "./components/pages/signIn";
 import SignUp from "./components/pages/signUp";
+import Cart from "./components/pages/cart/index";
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -62,6 +63,10 @@ function App() {
         {
           path: "/register",
           element: <SignUp />,
+        },
+        {
+          path: "/cart",
+          element: <Cart items={items} />,
         },
       ],
     },

@@ -4,14 +4,13 @@ import { Menu } from "antd";
 import Logo from "../logo";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { getTotalItemQty } from "../../../utils";
+import defaultTheme from "../../../theme";
 
 const { Search } = Input;
 
 const NavBar = () => {
   const cartItemQty = useSelector((state) => {
-    console.log("state", state);
-    return getTotalItemQty(state.cart.cartItems);
+    return state.cart?.totalQty;
   });
   const onSearch = (value, _e, info) => console.log(info?.source, value);
 
@@ -48,10 +47,19 @@ const NavBar = () => {
     { key: "register", label: <Link to={"/register"}>REGISTER</Link> },
     {
       key: "cart",
-      icon: (
-        <Badge count={cartItemQty} size="small" color="blue">
-          <ShoppingCartOutlined style={{ fontSize: "1.4rem" }} />
-        </Badge>
+      label: (
+        <Link to={"/cart"}>
+          <Badge
+            count={cartItemQty}
+            size="small"
+            color={defaultTheme.colors.yellow}
+            style={{ color: defaultTheme.colors.black, fontWeight: "700" }}
+          >
+            <ShoppingCartOutlined
+              style={{ fontSize: "1.4rem", color: "white" }}
+            />
+          </Badge>
+        </Link>
       ),
       style: {
         alignItems: "center",

@@ -33,7 +33,6 @@ const SignUp = () => {
           content: REGISTRATION_SUCCESSFUL,
         });
         navigate("/sign-in");
-        const user = userCredential.user;
       })
       .catch((error) => {
         console.log("error", error, error.code, error.message);

@@ -1,3 +1,4 @@
+import { PrimaryBtn } from "../button";
 import { BannerWrapper, InfoWrapper } from "./styles";
 
 const Banner = () => {
@@ -10,7 +11,7 @@ const Banner = () => {
       <InfoWrapper>
         <h1>LET'S EXPLORE UNIQUE CLOTHES.</h1>
         <p>Live for Influential and Innovative fashion!</p>
-        <button>SHOP NOW</button>
+        <PrimaryBtn>SHOP NOW</PrimaryBtn>
       </InfoWrapper>
     </BannerWrapper>
   );

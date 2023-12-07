@@ -12,6 +12,9 @@ export const LABEL_PASSWORD = "Password";
 export const LABEL_CONFIRM_PASSWORD = "Confirm Password";
 export const LABEL_EMAIL = "E-mail";
 
+// Button Labels
+export const LABEL_GO_TO_CHECKOUT = "GO TO CHECKOUT";
+
 //Error messages
 export const SOMETHING_WENT_WRONG = "Something went wrong.";
 export const INCORRECT_EMAIL_OR_PASSWORD = "Incorrect Email or Password.";

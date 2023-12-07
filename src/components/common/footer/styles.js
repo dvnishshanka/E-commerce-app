@@ -7,9 +7,6 @@ export const FooterContainer = styled.div`
   background-color: #001529;
   color: gray;
   padding: 30px;
-  margin-top: 30px;
-  //   position: absolute;
-  //   bottom: -250px;
 `;
 
 export const Title = styled.div`

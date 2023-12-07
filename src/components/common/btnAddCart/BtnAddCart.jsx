@@ -5,7 +5,7 @@ const BtnAddCart = ({ addToCartHandler }) => {
   return (
     <PrimaryBtn
       type="primary"
-      icon={<ShoppingCartOutlined />}
+      icon={<ShoppingCartOutlined style={{ fontSize: "20px" }} />}
       onClick={addToCartHandler}
       style={{ width: "100%" }}
     >
