@@ -7,10 +7,11 @@ import {
   INCORRECT_EMAIL_OR_PASSWORD,
   FIREBASE_ERR_INVALID_CREDENTIAL,
   SOMETHING_WENT_WRONG,
+  SIGNED_IN_SUCCESSFUL,
 } from "../../../constants/AppConstants";
 import { Link, useNavigate } from "react-router-dom";
 import { Title } from "./styles";
-import { auth } from "./../../../firebase";
+import { auth } from "../../../auth/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { PrimaryBtn } from "../../common/button";
 import { FormInput, FormInputPassword } from "../../common/input";
@@ -24,8 +25,12 @@ const SignIn = () => {
     signInWithEmailAndPassword(auth, values.email, values.password)
       .then((userCredential) => {
         // Signed in
-        // console.log("userCredential:", userCredential);
+        console.log("userCredential:", userCredential);
         // const user = userCredential.user;
+        messageApi.open({
+          type: "success",
+          content: SIGNED_IN_SUCCESSFUL,
+        });
         navigate("/");
       })
       .catch((error) => {

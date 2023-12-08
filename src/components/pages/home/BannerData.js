@@ -1,4 +1,5 @@
 import jewelleryBanner from "../../../assets/images/jewellery-banner.jpg";
+import ladiesDressBanner from "../../../assets/images/dress-banner.jpg";
 
 export const bannerData = [
   {
@@ -14,14 +15,15 @@ export const bannerData = [
     txtColor: "#000000",
   },
   {
-    image: jewelleryBanner,
-    name: "jewellery and other accessories",
-    title: "Elegance Redefined",
-    subTitle: "Unlock Your Radiance",
+    image: ladiesDressBanner,
+    name: "clothing",
+    title: "Elevate Your Wardrobe",
+    subTitle: " Where Style Meets Comfort",
     caption:
-      "Adorn yourself in the allure of timeless elegance. Discover handcrafted jewelry that illuminates your style with every shimmering detail.",
-    btnText: "Shop now",
-    bgColor: "#4e4b32",
-    imgColor: "#1E202F",
+      "Find your perfect fit from our range of trendy apparel crafted to celebrate your unique style.",
+    btnText: "Discover now",
+    bgColor: "#9d6d49",
+    imgColor: "#49799D",
+    txtColor: "#000000",
   },
 ];

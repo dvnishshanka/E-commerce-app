@@ -8,9 +8,9 @@ const Home = ({ items }) => {
   return (
     <>
       <Carousel
-      // autoplay
-      // autoplaySpeed={3000}
-      // speed={600}
+        autoplay
+        // autoplaySpeed={3000}
+        // speed={600}
       >
         {bannerData.map((el, index) => {
           return <Banner key={index} bannerData={el} />;

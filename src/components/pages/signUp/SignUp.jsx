@@ -15,27 +15,65 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { Title } from "./styles";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../../firebase";
+import { auth, db } from "../../../auth/firebase";
 import { PrimaryBtn } from "./../../common/button/styles";
 import { FormInput, FormInputPassword } from "../../common/input";
+import { ref, set } from "firebase/database";
 
 const SignUp = () => {
   const navigate = useNavigate();
   const [form] = Form.useForm();
   const [messageApi, contextHolder] = message.useMessage();
 
+  const writeUserData = (userId, userName, userEmail, userAddress) => {
+    const referance = ref(db, "users/" + userId);
+
+    const userData = {
+      name: userName,
+      email: userEmail,
+      address: userAddress,
+    };
+
+    set(referance, userData);
+  };
+
+  // const writeUserData2 = () => {
+  //   const referance = ref(db, "items/" + 1);
+  //   const userData = {
+  //     id: 1,
+  //     title: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
+  //     price: 109.95,
+  //     description:
+  //       "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
+  //     category: "men's clothing",
+  //     image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+  //     rating: { rate: 3.9, count: 120 },
+  //   };
+
+  //   set(referance, userData);
+  // };
+
   const onFinish = (values) => {
     createUserWithEmailAndPassword(auth, values.email, values.password)
-      .then((userCredential) => {
-        // Signed up
-        messageApi.open({
-          type: "success",
-          content: REGISTRATION_SUCCESSFUL,
-        });
-        navigate("/sign-in");
+      .then((userCredentials) => {
+        if (userCredentials) {
+          // Save User data on firebase database
+          writeUserData(
+            userCredentials.user.uid,
+            values.name,
+            values.email,
+            values.address
+          );
+          // writeUserData2();
+          navigate("/sign-in");
+          messageApi.open({
+            type: "success",
+            content: REGISTRATION_SUCCESSFUL,
+          });
+        }
       })
       .catch((error) => {
-        console.log("error", error, error.code, error.message);
+        console.error("Sign up error", error);
         const errorMessage =
           error.code === FIREBASE_ERR_EMAIL_EXIST
             ? EMAIL_EXIST

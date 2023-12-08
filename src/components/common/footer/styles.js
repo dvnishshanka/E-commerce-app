@@ -2,13 +2,14 @@ import styled from "styled-components";
 
 export const FooterContainer = styled.div`
   position: fixed;
-  bottom: 0;
+  /* bottom: 0; */
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   background-color: #001529;
   color: gray;
   padding: 30px;
+  width: 100%;
 `;
 
 export const Title = styled.div`

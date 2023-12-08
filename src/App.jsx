@@ -6,14 +6,28 @@ import HomePage from "./components/pages/home";
 import ItemPage from "./components/pages/itemPage";
 import ErrorPage from "./components/pages/Error";
 import axios from "axios";
-import { findItemFromID } from "./utils";
 import SignIn from "./components/pages/signIn";
 import SignUp from "./components/pages/signUp";
 import Cart from "./components/pages/cart/index";
+import { auth } from "./auth/firebase";
+import { onAuthStateChanged } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { ADD_USER_DATA, REMOVE_USER_DATA } from "./actions";
 
 function App() {
-  const [cart, setCart] = useState([]);
+  const dispatch = useDispatch();
   const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const serializedUserData = { uid: user.uid, email: user.email };
+        dispatch({ type: ADD_USER_DATA, userDetails: serializedUserData });
+      } else {
+        dispatch({ type: REMOVE_USER_DATA, userDetails: null });
+      }
+    });
+  }, [dispatch]);
 
   useEffect(() => {
     axios
@@ -27,21 +41,6 @@ function App() {
       });
   }, []);
 
-  const addToCart = (id) => {
-    const addedItem = findItemFromID(id, items);
-    addedItem?.quantity
-      ? (addedItem.quantity = addedItem.quantity + 1)
-      : (addedItem.quantity = 0);
-    console.log("added item", addedItem);
-    setCart((prevState) => {
-      // Check whether the item selected is already in the cart
-      const selectedItem = findItemFromID(id, cart);
-      // if (selectedItem)
-      //   return [...prevState, prevState]
-      return [...prevState, { addedItem }];
-    });
-  };
-
   const router = createBrowserRouter([
     {
       path: "/",
@@ -50,7 +49,7 @@ function App() {
       children: [
         {
           path: "/",
-          element: <HomePage items={items} addToCart={addToCart} />,
+          element: <HomePage items={items} />,
         },
         {
           path: "/items/:id",
@@ -71,10 +70,6 @@ function App() {
       ],
     },
   ]);
-
-  useEffect(() => {
-    // console.log(cart);
-  }, [cart]);
 
   return <RouterProvider router={router}></RouterProvider>;
 }

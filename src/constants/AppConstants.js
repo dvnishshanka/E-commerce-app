@@ -26,3 +26,5 @@ export const FIREBASE_ERR_EMAIL_EXIST = "auth/email-already-in-use";
 
 // Success messages
 export const REGISTRATION_SUCCESSFUL = "Registration Successful. Please login.";
+export const SIGNED_IN_SUCCESSFUL = "Signed In Successfully.";
+export const SIGNED_OUT_SUCCESSFULLY = "Signed Out Successfully.";
