@@ -1,8 +1,7 @@
 import { ShoppingCartOutlined } from "@ant-design/icons";
-import { Badge, Input, message } from "antd";
-import { Menu } from "antd";
+import { Badge, message } from "antd";
 import Logo from "../logo";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import defaultTheme from "../../../theme";
 import {
@@ -11,11 +10,12 @@ import {
 } from "../../../constants/AppConstants";
 import { signOut } from "firebase/auth";
 import { auth } from "../../../auth";
+import { NavElements, Container, NavBarWrapper } from "./styles";
 
-const { Search } = Input;
-
-const NavBar = () => {
+const NavBar = ({ items }) => {
   const [messageApi, contextHolder] = message.useMessage();
+
+  const allCategories = [...new Set(items.map((item) => item.category))];
 
   const cartItemQty = useSelector((state) => {
     return state.cart?.totalQty;
@@ -43,88 +43,68 @@ const NavBar = () => {
       });
   };
 
-  const onSearch = (value, _e, info) => console.log(info?.source, value);
-
-  const menuItems = [
-    {
-      key: "logo",
-      label: <Logo />,
-      style: {
-        alignItems: "center",
-      },
-      // selectable: "false",
-    },
-    {
-      key: "search",
-      label: (
-        <Search
-          placeholder="Search Item"
-          onSearch={onSearch}
-          enterButton
-          style={{ width: 250 }}
-        />
-      ),
-      style: {
-        alignItems: "center",
-      },
-    },
-    {
-      key: "name",
-      label: `${userDetails?.email} Hi`,
-      style: {
-        alignItems: "center",
-      },
-      // selectable: "false",
-    },
-    {
-      key: "signIn",
-      label: <Link to={"/sign-in"}>SIGN IN</Link>,
-      style: {
-        alignItems: "center",
-      },
-    },
-    {
-      key: "signOut",
-      label: (
-        <div role="button" onClick={signOutUser}>
-          SIGN OUT
-        </div>
-      ),
-      style: {
-        alignItems: "center",
-      },
-    },
-    { key: "register", label: <Link to={"/register"}>REGISTER</Link> },
-    {
-      key: "cart",
-      label: (
-        <Link to={"/cart"}>
-          <Badge
-            count={cartItemQty}
-            size="small"
-            color={defaultTheme.colors.yellow}
-            style={{ color: defaultTheme.colors.black, fontWeight: "700" }}
-          >
-            <ShoppingCartOutlined style={{ fontSize: "1.4rem" }} />
-          </Badge>
-        </Link>
-      ),
-      style: {
-        alignItems: "center",
-      },
-    },
-  ];
-
   return (
-    <nav>
+    <NavBarWrapper>
       {contextHolder}
-      <Menu
-        mode="horizontal"
-        items={menuItems}
-        style={{ display: "flex" }}
-        // theme="dark"
-      ></Menu>
-    </nav>
+      <Container>
+        <div>
+          <NavLink to={"/"} style={{ textDecoration: "none" }}>
+            <Logo />
+          </NavLink>
+        </div>
+        <div>
+          <NavElements>
+            {!userDetails && (
+              <li>
+                <NavLink to={"/sign-in"}>Sign in</NavLink>
+              </li>
+            )}
+            {userDetails && (
+              <li>
+                <div
+                  role="button"
+                  onClick={signOutUser}
+                  style={{ cursor: "pointer" }}
+                >
+                  Sign out
+                </div>
+              </li>
+            )}
+            <li>
+              <NavLink to={"/register"}>Register</NavLink>
+            </li>
+            <li>
+              <NavLink to={"/cart"}>
+                <Badge
+                  count={cartItemQty}
+                  size="small"
+                  color={defaultTheme.colors.yellow}
+                  style={{
+                    color: defaultTheme.colors.black,
+                    fontWeight: "700",
+                  }}
+                >
+                  <ShoppingCartOutlined style={{ fontSize: "1.4rem" }} />
+                </Badge>
+              </NavLink>
+            </li>
+          </NavElements>
+        </div>
+      </Container>
+      <Container>
+        <div>
+          <NavElements>
+            {allCategories.map((category, index) => {
+              return (
+                <li key={index}>
+                  <NavLink to={`/${category}`}>{category}</NavLink>
+                </li>
+              );
+            })}
+          </NavElements>
+        </div>
+      </Container>
+    </NavBarWrapper>
   );
 };
 

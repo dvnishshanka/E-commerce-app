@@ -98,7 +98,8 @@ const SignUp = () => {
         layout="vertical"
         style={{
           maxWidth: "400px",
-          margin: " 50px auto",
+          marginLeft: "auto",
+          marginRight: "auto",
           border: "2px solid light-gray",
           borderRadius: "5px",
           padding: "10px 20px ",

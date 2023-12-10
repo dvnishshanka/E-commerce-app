@@ -5,5 +5,4 @@ export const ItemsWrapper = styled.div`
   gap: 20px 20px;
   grid-template-columns: auto auto auto;
   justify-content: space-around;
-  padding-top: 20px;
 `;

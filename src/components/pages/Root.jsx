@@ -3,19 +3,20 @@ import NavBar from "../common/navBar";
 import Footer from "../common/footer";
 import defaultTheme from "../../theme";
 
-const Root = () => {
+const Root = ({ items }) => {
   return (
     <div style={{ minHeight: "100vh" }}>
-      <NavBar />
+      <NavBar items={items} />
       <main
         style={{
           backgroundColor: `${defaultTheme.colors.lightGray}`,
-          marginBottom: "30px",
+          // paddingBottom: "30px",
+          // margin: "0",
         }}
       >
         <Outlet />
       </main>
-      <Footer />
+      <Footer items={items} />
     </div>
   );
 };

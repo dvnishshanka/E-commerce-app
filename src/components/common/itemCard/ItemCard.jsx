@@ -7,16 +7,9 @@ import { findItemFromID, getOrderedItemQty } from "../../../utils";
 import BtnAddCart from "../btnAddCart";
 import QtyChanger from "../qtyChanger";
 
-const ItemCard = ({
-  items,
-  title,
-  id,
-  description,
-  price,
-  image,
-  showDescription = false,
-}) => {
+const ItemCard = ({ items, itemDetails }) => {
   const dispatch = useDispatch();
+  const { title, id, price, image } = itemDetails;
 
   const noOfItems = useSelector((state) => {
     return getOrderedItemQty(id, state.cart.cartItems);

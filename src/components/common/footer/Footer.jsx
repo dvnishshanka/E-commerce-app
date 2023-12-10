@@ -1,6 +1,7 @@
 import styles from "./styles.module.css";
 import { FooterContainer, InfoColumn, Title, SocialMedia } from "./styles";
 import Logo from "../logo";
+import { NavLink } from "react-router-dom";
 import {
   HomeOutlined,
   MailOutlined,
@@ -11,7 +12,9 @@ import {
   SkypeFilled,
 } from "@ant-design/icons";
 
-const Footer = () => {
+const Footer = ({ items }) => {
+  const allCategories = [...new Set(items.map((item) => item.category))];
+
   const socialMediaStyles = {
     paddingRight: "15px",
     fontSize: "25px",
@@ -48,10 +51,13 @@ const Footer = () => {
       <InfoColumn style={{ flex: "1" }}>
         <Title> PRODUCTS</Title>
         <ul style={listStyles}>
-          <li>Product 1</li>
-          <li>Product 1</li>
-          <li>Product 1</li>
-          <li>Product 1</li>
+          {allCategories.map((category, index) => {
+            return (
+              <li key={index}>
+                <NavLink to={`/${category}`}>{category}</NavLink>
+              </li>
+            );
+          })}
         </ul>
       </InfoColumn>
       <InfoColumn style={{ flex: "1.5" }}>

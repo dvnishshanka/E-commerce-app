@@ -1,34 +1,12 @@
 import { Card } from "antd";
-// import { ItemDescription, Image } from "./styles";
+import { ItemDescription, Image, Wrapper } from "./styles";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { ADD_TO_CART, REMOVE_FROM_CART } from "./../../../actions/ActionTypes";
 import { findItemFromID, getOrderedItemQty } from "../../../utils";
 import BtnAddCart from "../btnAddCart";
 import QtyChanger from "../qtyChanger";
-
-import styled from "styled-components";
 import defaultTheme from "../../../theme";
-
-export const Wrapper = styled.div`
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-`;
-
-export const Image = styled.img`
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: cover;
-`;
-
-export const ItemDescription = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  width: 80%;
-  bottom: 5%;
-`;
 
 const CartItemCard = ({ item, itemList }) => {
   const dispatch = useDispatch();

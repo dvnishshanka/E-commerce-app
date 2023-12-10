@@ -1,10 +1,12 @@
+import defaultTheme from "../../../theme";
 import { Logo } from "./styles";
-import { Link } from "react-router-dom";
+import { ShoppingTwoTone } from "@ant-design/icons";
 
 const CompanyLogo = () => {
   return (
     <Logo>
-      <Link to="/">FlexiCart</Link>
+      <ShoppingTwoTone twoToneColor={defaultTheme.colors.yellow} />
+      FlexiCart
     </Logo>
   );
 };

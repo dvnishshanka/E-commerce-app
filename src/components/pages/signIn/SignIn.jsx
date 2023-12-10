@@ -1,4 +1,4 @@
-import { Form, message } from "antd";
+import { Form, message } from 'antd';
 import {
   LABEL_SIGN_IN,
   LABEL_REGISTER_NOW,
@@ -7,14 +7,14 @@ import {
   INCORRECT_EMAIL_OR_PASSWORD,
   FIREBASE_ERR_INVALID_CREDENTIAL,
   SOMETHING_WENT_WRONG,
-  SIGNED_IN_SUCCESSFUL,
-} from "../../../constants/AppConstants";
-import { Link, useNavigate } from "react-router-dom";
-import { Title } from "./styles";
-import { auth } from "../../../auth/firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { PrimaryBtn } from "../../common/button";
-import { FormInput, FormInputPassword } from "../../common/input";
+  SIGNED_IN_SUCCESSFUL
+} from '../../../constants/AppConstants';
+import { Link, useNavigate } from 'react-router-dom';
+import { Title } from './styles';
+import { auth } from '../../../auth/firebase';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { PrimaryBtn } from '../../common/button';
+import { FormInput, FormInputPassword } from '../../common/input';
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -25,13 +25,13 @@ const SignIn = () => {
     signInWithEmailAndPassword(auth, values.email, values.password)
       .then((userCredential) => {
         // Signed in
-        console.log("userCredential:", userCredential);
+        console.log('userCredential:', userCredential);
         // const user = userCredential.user;
+        navigate('/');
         messageApi.open({
-          type: "success",
-          content: SIGNED_IN_SUCCESSFUL,
+          type: 'success',
+          content: SIGNED_IN_SUCCESSFUL
         });
-        navigate("/");
       })
       .catch((error) => {
         const errorMessage =
@@ -40,8 +40,8 @@ const SignIn = () => {
             : SOMETHING_WENT_WRONG;
 
         messageApi.open({
-          type: "error",
-          content: errorMessage,
+          type: 'error',
+          content: errorMessage
         });
       });
   };
@@ -49,9 +49,8 @@ const SignIn = () => {
   // When form submission failed
   const onFinishFailed = (errorInfo) => {
     messageApi.open({
-      type: "error",
-      content:
-        errorInfo?.errorFields[0]?.errors[0] || INCORRECT_EMAIL_OR_PASSWORD,
+      type: 'error',
+      content: errorInfo?.errorFields[0]?.errors[0] || INCORRECT_EMAIL_OR_PASSWORD
     });
   };
 
@@ -61,16 +60,16 @@ const SignIn = () => {
       <Form
         form={form}
         style={{
-          maxWidth: "400px",
-          margin: " 50px auto",
-          border: "2px solid light-gray",
-          borderRadius: "5px",
-          padding: "10px 20px ",
+          maxWidth: '400px',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          border: '2px solid light-gray',
+          borderRadius: '5px',
+          padding: '10px 20px '
         }}
         onFinish={onSubmit}
         onFinishFailed={onFinishFailed}
-        layout="vertical"
-      >
+        layout="vertical">
         <Title>{LABEL_WELCOME_BACK}</Title>
 
         <Form.Item
@@ -78,22 +77,20 @@ const SignIn = () => {
           label="E-mail"
           rules={[
             {
-              type: "email",
-              message: "The input is not valid E-mail!",
+              type: 'email',
+              message: 'The input is not valid E-mail!'
             },
             {
               required: true,
-              message: "Please input your E-mail!",
-            },
-          ]}
-        >
+              message: 'Please input your E-mail!'
+            }
+          ]}>
           <FormInput />
         </Form.Item>
         <Form.Item
           name="password"
           label={LABEL_PASSWORD}
-          rules={[{ required: true, message: "Please input your Password!" }]}
-        >
+          rules={[{ required: true, message: 'Please input your Password!' }]}>
           <FormInputPassword />
         </Form.Item>
         <Form.Item shouldUpdate>
@@ -103,18 +100,16 @@ const SignIn = () => {
               htmlType="submit"
               disabled={
                 !form.isFieldsTouched(true) ||
-                !!form.getFieldsError().filter(({ errors }) => errors.length)
-                  .length
-              }
-            >
+                !!form.getFieldsError().filter(({ errors }) => errors.length).length
+              }>
               {LABEL_SIGN_IN}
             </PrimaryBtn>
           )}
         </Form.Item>
         <Form.Item>
           <p>
-            Don't have an account?
-            <Link to={"/register"}> {LABEL_REGISTER_NOW}</Link>
+            ${"Don't have an account?"}
+            <Link to={'/register'}> {LABEL_REGISTER_NOW}</Link>
           </p>
         </Form.Item>
       </Form>

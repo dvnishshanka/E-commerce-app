@@ -20,3 +20,9 @@ export const getOrderedItemQty = (itemId, cartArr) => {
   if (itemIndex >= 0) return cartArr[itemIndex].qty;
   else return ZERO_ITEMS_IN_CART;
 };
+
+// Filter items from the item array based on a specific key-value pair
+export const filterItems = (itemArr, keyData, value) => {
+  const filteredItems = itemArr.filter((item) => item[keyData] === value);
+  return filteredItems;
+};

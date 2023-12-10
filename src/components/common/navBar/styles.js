@@ -1,47 +1,50 @@
 import styled from "styled-components";
 
-export const NavContainer = styled.nav`
+export const Container = styled.div`
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
 `;
 
-export const LeftWrapper = styled.div`
+export const NavBarWrapper = styled.nav`
+  background-color: #efeff0;
+  width: 100%;
+  padding: 0 15px;
   display: flex;
-  justify-content: flex-start;
+  flex-direction: column;
   align-items: center;
-  flex: 1;
-  font-size: 10;
 `;
 
-export const CenterWrapper = styled.div`
-  flex: 1;
+export const NavElements = styled.ul`
   display: flex;
-  justify-content: center;
-`;
+  justify-content: space-between;
+  list-style-type: none;
 
-export const RightWrapper = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  flex: 1;
-  font-size: 10;
-`;
-
-export const NavItem = styled.p`
-  padding: 0 25px;
-`;
-
-export const Input = styled.input`
-  padding: 5px;
-  border: 0;
-
-  &:focus {
-    outline: none;
+  li:not(:last-child) {
+    margin-right: 60px;
   }
-`;
 
-export const SearchBar = styled.div`
-  display: flex;
-  align-items: center;
-  border: 0.5px solid gray;
+  a {
+    font-size: 16px;
+    font-weight: 400;
+    color: #2f234f;
+    text-decoration: none;
+  }
+
+  a.active {
+    color: #ba2d2d;
+    font-weight: 500;
+    position: relative;
+  }
+
+  a.active::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #574c4c;
+  }
 `;

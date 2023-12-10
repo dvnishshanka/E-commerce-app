@@ -13,6 +13,8 @@ import { auth } from "./auth/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { ADD_USER_DATA, REMOVE_USER_DATA } from "./actions";
+import CategoryPage from "./components/pages/categoryPage";
+import { items } from "./assets/db/items";
 
 function App() {
   const dispatch = useDispatch();
@@ -44,12 +46,16 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <RootPage />,
+      element: <RootPage items={items} />,
       errorElement: <ErrorPage />,
       children: [
         {
           path: "/",
           element: <HomePage items={items} />,
+        },
+        {
+          path: "/:category",
+          element: <CategoryPage items={items} />,
         },
         {
           path: "/items/:id",

@@ -7,28 +7,15 @@ import { bannerData } from "./BannerData";
 const Home = ({ items }) => {
   return (
     <>
-      <Carousel
-        autoplay
-        // autoplaySpeed={3000}
-        // speed={600}
-      >
+      <Carousel autoplay speed={500}>
         {bannerData.map((el, index) => {
           return <Banner key={index} bannerData={el} />;
         })}
       </Carousel>
+
       <ItemsWrapper>
         {items.map((item) => {
-          return (
-            <Item
-              items={items}
-              key={item.id}
-              id={item.id}
-              title={item.title}
-              price={item.price}
-              description={item.description}
-              image={item.image}
-            />
-          );
+          return <Item items={items} key={item.id} itemDetails={item} />;
         })}
       </ItemsWrapper>
     </>

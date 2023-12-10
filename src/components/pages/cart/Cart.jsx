@@ -1,40 +1,14 @@
 import { useSelector } from "react-redux";
-
-import styled from "styled-components";
-import defaultTheme from "./../../../theme/index";
+import {
+  CartContainer,
+  CartItemsWrapper,
+  CartSummary,
+  SummaryLine,
+} from "./styles";
 import { PrimaryBtn } from "../../common/button";
 import { LABEL_GO_TO_CHECKOUT } from "../../../constants/AppConstants";
 import CartItemCard from "../../common/cartItemCard";
-
-export const CartContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  background-color: ${defaultTheme.colors.lightGray};
-`;
-
-export const CartItemsWrapper = styled.div`
-  background-color: ${defaultTheme.colors.white};
-  width: fit-content;
-  border-radius: 2px;
-  margin-left: 20px;
-  padding: 10px 10px;
-`;
-
-export const CartSummary = styled.div`
-  background-color: ${defaultTheme.colors.white};
-  padding: 10px 10px;
-  margin-right: 20px;
-  border-radius: 2px;
-`;
-
-export const SummaryLine = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  p {
-    padding-right: 30px;
-  }
-`;
+import defaultTheme from "./../../../theme/index";
 
 const Cart = ({ items }) => {
   const cartData = useSelector((state) => {
