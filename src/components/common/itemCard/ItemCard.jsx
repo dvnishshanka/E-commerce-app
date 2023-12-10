@@ -1,14 +1,15 @@
-import { Card } from "antd";
-import { ItemDescription, Image } from "./styles";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { ADD_TO_CART, REMOVE_FROM_CART } from "./../../../actions/ActionTypes";
-import { findItemFromID, getOrderedItemQty } from "../../../utils";
-import BtnAddCart from "../btnAddCart";
-import QtyChanger from "../qtyChanger";
+import { Card } from 'antd';
+import { ItemDescription, Image } from './styles';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { ADD_TO_CART, REMOVE_FROM_CART } from './../../../actions/ActionTypes';
+import { findItemFromID, getOrderedItemQty } from '../../../utils';
+import BtnAddCart from '../btnAddCart';
+import QtyChanger from '../qtyChanger';
 
-const ItemCard = ({ items, itemDetails }) => {
+const ItemCard = ({ itemDetails }) => {
   const dispatch = useDispatch();
+  const items = useSelector((state) => state.items);
   const { title, id, price, image } = itemDetails;
 
   const noOfItems = useSelector((state) => {
@@ -29,7 +30,7 @@ const ItemCard = ({ items, itemDetails }) => {
       style={{
         width: 240,
         height: 400,
-        position: "relative",
+        position: 'relative',
       }}
     >
       <Link to={`/items/${id}`}>

@@ -1,20 +1,17 @@
-import { ShoppingCartOutlined } from "@ant-design/icons";
-import { Badge, message } from "antd";
-import Logo from "../logo";
-import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
-import defaultTheme from "../../../theme";
-import {
-  SIGNED_OUT_SUCCESSFULLY,
-  SOMETHING_WENT_WRONG,
-} from "../../../constants/AppConstants";
-import { signOut } from "firebase/auth";
-import { auth } from "../../../auth";
-import { NavElements, Container, NavBarWrapper } from "./styles";
+import { ShoppingCartOutlined } from '@ant-design/icons';
+import { Badge, message } from 'antd';
+import Logo from '../logo';
+import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import defaultTheme from '../../../theme';
+import { SIGNED_OUT_SUCCESSFULLY, SOMETHING_WENT_WRONG } from '../../../constants/AppConstants';
+import { signOut } from 'firebase/auth';
+import { auth } from '../../../auth';
+import { NavElements, Container, NavBarWrapper } from './styles';
 
-const NavBar = ({ items }) => {
+const NavBar = () => {
   const [messageApi, contextHolder] = message.useMessage();
-
+  const items = useSelector((state) => state.items);
   const allCategories = [...new Set(items.map((item) => item.category))];
 
   const cartItemQty = useSelector((state) => {
@@ -30,14 +27,14 @@ const NavBar = ({ items }) => {
       .then(() => {
         // Sign-out successful.
         messageApi.open({
-          type: "success",
+          type: 'success',
           content: SIGNED_OUT_SUCCESSFULLY,
         });
       })
       .catch((error) => {
         console.log(error);
         messageApi.open({
-          type: "error",
+          type: 'error',
           content: SOMETHING_WENT_WRONG,
         });
       });
@@ -48,7 +45,7 @@ const NavBar = ({ items }) => {
       {contextHolder}
       <Container>
         <div>
-          <NavLink to={"/"} style={{ textDecoration: "none" }}>
+          <NavLink to={'/'} style={{ textDecoration: 'none' }}>
             <Logo />
           </NavLink>
         </div>
@@ -56,35 +53,31 @@ const NavBar = ({ items }) => {
           <NavElements>
             {!userDetails && (
               <li>
-                <NavLink to={"/sign-in"}>Sign in</NavLink>
+                <NavLink to={'/sign-in'}>Sign in</NavLink>
               </li>
             )}
             {userDetails && (
               <li>
-                <div
-                  role="button"
-                  onClick={signOutUser}
-                  style={{ cursor: "pointer" }}
-                >
+                <div role="button" onClick={signOutUser} style={{ cursor: 'pointer' }}>
                   Sign out
                 </div>
               </li>
             )}
             <li>
-              <NavLink to={"/register"}>Register</NavLink>
+              <NavLink to={'/register'}>Register</NavLink>
             </li>
             <li>
-              <NavLink to={"/cart"}>
+              <NavLink to={'/cart'}>
                 <Badge
                   count={cartItemQty}
                   size="small"
                   color={defaultTheme.colors.yellow}
                   style={{
                     color: defaultTheme.colors.black,
-                    fontWeight: "700",
+                    fontWeight: '700',
                   }}
                 >
-                  <ShoppingCartOutlined style={{ fontSize: "1.4rem" }} />
+                  <ShoppingCartOutlined style={{ fontSize: '1.4rem' }} />
                 </Badge>
               </NavLink>
             </li>

@@ -1,15 +1,16 @@
-import { Card } from "antd";
-import { ItemDescription, Image, Wrapper } from "./styles";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { ADD_TO_CART, REMOVE_FROM_CART } from "./../../../actions/ActionTypes";
-import { findItemFromID, getOrderedItemQty } from "../../../utils";
-import BtnAddCart from "../btnAddCart";
-import QtyChanger from "../qtyChanger";
-import defaultTheme from "../../../theme";
+import { Card } from 'antd';
+import { ItemDescription, Image, Wrapper } from './styles';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { ADD_TO_CART, REMOVE_FROM_CART } from './../../../actions/ActionTypes';
+import { findItemFromID, getOrderedItemQty } from '../../../utils';
+import BtnAddCart from '../btnAddCart';
+import QtyChanger from '../qtyChanger';
+import defaultTheme from '../../../theme';
 
-const CartItemCard = ({ item, itemList }) => {
+const CartItemCard = ({ item }) => {
   const dispatch = useDispatch();
+  const itemList = useSelector((state) => state.items);
 
   const noOfItems = useSelector((state) => {
     return getOrderedItemQty(item.id, state.cart.cartItems);
@@ -29,7 +30,7 @@ const CartItemCard = ({ item, itemList }) => {
   return (
     <Card
       style={{
-        width: "60vw",
+        width: '60vw',
         borderRadius: 0,
         backgroundColor: `${defaultTheme.colors.white}`,
       }}
@@ -37,7 +38,7 @@ const CartItemCard = ({ item, itemList }) => {
       <Wrapper>
         <Link
           to={`/items/${item?.id}`}
-          style={{ maxWidth: "20%", maxHeight: "100%", marginRight: "30px" }}
+          style={{ maxWidth: '20%', maxHeight: '100%', marginRight: '30px' }}
         >
           <Image src={item?.image} alt={item?.title} />
         </Link>
@@ -45,7 +46,7 @@ const CartItemCard = ({ item, itemList }) => {
           {item.title && <h4>{item.title}</h4>}
           {item.category && <p style={{ margin: 0 }}>{item.category}</p>}
           {item.price && (
-            <p style={{ fontWeight: "bold", fontSize: "1.2rem" }}>
+            <p style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
               {`€ ${Number(item.price).toFixed(2)}`} / item
             </p>
           )}
@@ -54,13 +55,10 @@ const CartItemCard = ({ item, itemList }) => {
               removeFromCartHandler={removeFromCartHandler}
               addToCartHandler={addToCartHandler}
               noOfItems={noOfItems}
-              style={{ width: "200px" }}
+              style={{ width: '200px' }}
             />
           ) : (
-            <BtnAddCart
-              addToCartHandler={addToCartHandler}
-              style={{ width: "50%" }}
-            />
+            <BtnAddCart addToCartHandler={addToCartHandler} style={{ width: '50%' }} />
           )}
         </ItemDescription>
       </Wrapper>

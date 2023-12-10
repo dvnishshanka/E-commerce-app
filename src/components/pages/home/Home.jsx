@@ -1,10 +1,15 @@
-import { Carousel } from "antd";
-import Banner from "../../common/banner";
-import Item from "../../common/itemCard";
-import { ItemsWrapper } from "./styles";
-import { bannerData } from "./BannerData";
+import { Carousel } from 'antd';
+import Banner from '../../common/banner';
+import Item from '../../common/itemCard';
+import { ItemsWrapper } from './styles';
+import { bannerData } from './BannerData';
+import { useSelector } from 'react-redux';
 
-const Home = ({ items }) => {
+const Home = () => {
+  const items = useSelector((state) => {
+    return state.items;
+  });
+
   return (
     <>
       <Carousel autoplay speed={500}>
@@ -15,7 +20,7 @@ const Home = ({ items }) => {
 
       <ItemsWrapper>
         {items.map((item) => {
-          return <Item items={items} key={item.id} itemDetails={item} />;
+          return <Item key={item.id} itemDetails={item} />;
         })}
       </ItemsWrapper>
     </>

@@ -1,12 +1,12 @@
-import { Outlet } from "react-router-dom";
-import NavBar from "../common/navBar";
-import Footer from "../common/footer";
-import defaultTheme from "../../theme";
+import { Outlet } from 'react-router-dom';
+import NavBar from '../common/navBar';
+import Footer from '../common/footer';
+import defaultTheme from '../../theme';
 
-const Root = ({ items }) => {
+const Root = () => {
   return (
-    <div style={{ minHeight: "100vh" }}>
-      <NavBar items={items} />
+    <div style={{ minHeight: '100vh' }}>
+      <NavBar />
       <main
         style={{
           backgroundColor: `${defaultTheme.colors.lightGray}`,
@@ -16,7 +16,7 @@ const Root = ({ items }) => {
       >
         <Outlet />
       </main>
-      <Footer items={items} />
+      <Footer />
     </div>
   );
 };

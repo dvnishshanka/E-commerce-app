@@ -1,12 +1,12 @@
-import { useParams } from "react-router-dom";
-import { Rate } from "antd";
-import { useDispatch, useSelector } from "react-redux";
-import { ADD_TO_CART, REMOVE_FROM_CART } from "../../../actions";
-import { findItemFromID, getOrderedItemQty } from "../../../utils";
-import WavesOutlinedIcon from "@mui/icons-material/WavesOutlined";
-import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined";
-import BtnAddCart from "../../common/btnAddCart";
-import QtyChanger from "../../common/qtyChanger";
+import { useParams } from 'react-router-dom';
+import { Rate } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
+import { ADD_TO_CART, REMOVE_FROM_CART } from '../../../actions';
+import { findItemFromID, getOrderedItemQty } from '../../../utils';
+import WavesOutlinedIcon from '@mui/icons-material/WavesOutlined';
+import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
+import BtnAddCart from '../../common/btnAddCart';
+import QtyChanger from '../../common/qtyChanger';
 import {
   Container,
   ItemInfo,
@@ -19,10 +19,11 @@ import {
   FastDeliveryIcon,
   Image,
   DeliveryInfo,
-} from "./styles";
+} from './styles';
 
-const ItemPage = ({ items }) => {
+const ItemPage = () => {
   const dispatch = useDispatch();
+  const items = useSelector((state) => state.items);
   const { id } = useParams();
 
   const itemDetails = findItemFromID(id, items);
