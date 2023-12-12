@@ -1,70 +1,54 @@
-# Getting Started with Create React App
+# FlexiCart E-commerce App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Basic 2D game in which a bird can go to the nest after eating all cherries.
 
-## Available Scripts
+**Languages**
 
-In the project directory, you can run:
+[![My Skills](https://skillicons.dev/icons?i=react)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=html)](https://skillicons.dev)
 
-### `npm start`
+**Features**
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- The bird’s goal is to collect all cherries present on the map, then go inside the nest chosing the shortest possible route.
+- The W, A, S, and D keys can be used to move the bird in 4 directions: up, down, left, right. Arrow keys can also be used alternatively.
+- The bird is not able to move into walls.
+- At every move, the current number of movements is displayed in the shell.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+  https://github.com/dvnishshanka/42-Berlin-so_long/assets/108521900/c4ff969a-a3df-4e79-886b-a2ebe46b780d
 
-### `npm test`
+**Map**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- The map can be composed of only these 6 characters:
+  - **0**  empty space,
+  - **1**  wall,
+  - **C**  collectible/cherry,
+  - **E** map exit/nest,
+  - **P**  player’s/bird's starting position.
+  - **W**  enemy
 
-### `npm run build`
+- The map must contain 1 exit, at least 1 collectible, and 1 starting position to be valid.
+  
+- The map must be rectangular.
+  
+- The map must be closed/surrounded by walls. If it’s not, the program will return an error.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Map should have a valid solution.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**Usage**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Compile and create the executables
+  ```
+  make
+  ```
+- Start the game
+  ```
+  ./so_long <map file path>
+  ```
+  Example
+  ```
+  ./so_long maps/big_mapv.ber
+  ```
 
-### `npm run eject`
+**Resources**
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- https://harm-smits.github.io/42docs/libs/minilibx
