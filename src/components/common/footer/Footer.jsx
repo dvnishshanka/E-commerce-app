@@ -52,6 +52,9 @@ const Footer = () => {
               </li>
             );
           })}
+          <li key="sale">
+            <NavLink to={`/sale`}>Sale %</NavLink>
+          </li>
         </ul>
       </InfoColumn>
       <InfoColumn style={{ flex: '1.5' }}>

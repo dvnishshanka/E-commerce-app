@@ -17,39 +17,55 @@ const Cart = () => {
   const totalDeliveryCharge = calTotalDeliveryCharge(cartData.cartItems);
 
   const checkoutHandler = () => {
-    if (!auth) {
-      setShowModal(true);
-    }
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
   };
 
   return (
     <>
       <Modal
-        title="Sign in Required"
+        title={!auth && 'Sign in Required'}
         open={showModal}
-        onCancel={() => {
-          setShowModal(false);
-        }}
-        footer={[
-          <SecondaryBtn
-            key="register"
-            onClick={() => {
-              navigate('/register');
-            }}
-          >
-            Register
-          </SecondaryBtn>,
-          <PrimaryBtn
-            key="sign-in"
-            onClick={() => {
-              navigate('/sign-in');
-            }}
-          >
-            Sign in
-          </PrimaryBtn>,
-        ]}
+        onCancel={closeModal}
+        footer={
+          !auth ? (
+            [
+              <SecondaryBtn
+                key="register"
+                onClick={() => {
+                  navigate('/register');
+                }}
+              >
+                Register
+              </SecondaryBtn>,
+              <PrimaryBtn
+                key="sign-in"
+                onClick={() => {
+                  navigate('/sign-in');
+                }}
+              >
+                Sign in
+              </PrimaryBtn>,
+            ]
+          ) : (
+            <PrimaryBtn
+              key="cancel"
+              onClick={() => {
+                closeModal();
+                navigate('/');
+              }}
+            >
+              Close
+            </PrimaryBtn>
+          )
+        }
       >
-        Please login to proceed with the checkout.
+        {!auth
+          ? 'Please login to proceed with the checkout.'
+          : "We're sorry, but this feature is currently under construction."}
       </Modal>
       {cartData?.totalQty === 0 ? (
         <CartContainer>
