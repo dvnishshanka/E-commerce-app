@@ -31,8 +31,10 @@ const Footer = () => {
           <Logo style={{ marginTop: '0' }} />
         </Title>
         <p style={{ paddingRight: '50px' }}>
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-          been the industry's standard dummy text ever since the 1500s,
+          Explore our wide range of products and discover the perfect fit for your needs. Shop with
+          confidence, backed by our quality guarantee. Enjoy hassle-free returns, secure checkout,
+          and swift delivery to your doorstep. Join our community today and experience the
+          convenience of seamless online shopping. Your satisfaction is our priority!
         </p>
         <SocialMedia>
           <FacebookFilled style={socialMediaStyles} className={styles.socialMedia} />

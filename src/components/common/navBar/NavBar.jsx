@@ -7,10 +7,12 @@ import defaultTheme from '../../../theme';
 import { SIGNED_OUT_SUCCESSFULLY, SOMETHING_WENT_WRONG } from '../../../constants/AppConstants';
 import { signOut } from 'firebase/auth';
 import { auth } from '../../../auth';
-import { NavElements, Container, NavBarWrapper } from './styles';
+import { NavElements, Container, NavBarWrapper, Menu } from './styles';
+import { useState } from 'react';
 
 const NavBar = () => {
   const [messageApi, contextHolder] = message.useMessage();
+  const [menuOpen, setMenuOpen] = useState(false);
   const items = useSelector((state) => state.items);
   const allCategories = [...new Set(items.map((item) => item.category))];
 
@@ -49,6 +51,13 @@ const NavBar = () => {
             <Logo />
           </NavLink>
         </div>
+        {menuOpen && (
+          <Menu onClick={() => setMenuOpen(!menuOpen)}>
+            <span></span>
+            <span></span>
+            <span></span>
+          </Menu>
+        )}
         <div>
           <NavElements>
             {!userDetails && (

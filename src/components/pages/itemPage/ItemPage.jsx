@@ -6,6 +6,7 @@ import { findItemFromID, getOrderedItemQty } from '../../../utils';
 import WavesOutlinedIcon from '@mui/icons-material/WavesOutlined';
 import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
 import BtnAddCart from '../../common/btnAddCart';
+import defaultTheme from './../../../theme/index';
 import QtyChanger from '../../common/qtyChanger';
 import {
   Container,
@@ -18,6 +19,8 @@ import {
   DeliveryInfoRow,
   FastDeliveryIcon,
   Image,
+  OriginalPrice,
+  DiscountedPrice,
   DeliveryInfo,
 } from './styles';
 
@@ -42,11 +45,30 @@ const ItemPage = () => {
 
   return (
     <Container>
-      <Image src={itemDetails.image} alt={itemDetails.title} />
+      <Image src={itemDetails?.image} alt={itemDetails?.title} />
       <ItemInfo>
         <Title>{itemDetails.title}</Title>
         <Description>{itemDetails.description}</Description>
-        <Price>{`€ ${Number(itemDetails.price).toFixed(2)}`}</Price>
+
+        {itemDetails.discountRate > 0 ? (
+          <>
+            <DiscountedPrice>{`€ ${Number(
+              itemDetails.price * (1 - itemDetails.discountRate / 100),
+            ).toFixed(2)}`}</DiscountedPrice>
+            <OriginalPrice>
+              Originally:
+              <span style={{ textDecoration: 'line-through' }}>{` € ${Number(
+                itemDetails.price,
+              ).toFixed(2)}`}</span>
+              <span style={{ color: `${defaultTheme.colors.black}`, fontWeight: 'bold' }}>
+                {` ${itemDetails.discountRate}%`}{' '}
+              </span>
+            </OriginalPrice>
+          </>
+        ) : (
+          <Price>{`€ ${Number(itemDetails.price).toFixed(2)}`}</Price>
+        )}
+
         <Rating>
           <Rate disabled allowHalf defaultValue={itemDetails.rating.rate} />
           <RatingCount>{`(${itemDetails.rating.count}) reviews`}</RatingCount>
@@ -66,15 +88,15 @@ const ItemPage = () => {
             <LocalShippingOutlinedIcon />
           </FastDeliveryIcon>
           <DeliveryInfoRow>
-            <div>1-2 working days</div>
-            <div>{`€ ${Number(5).toFixed(2)}`}</div>
+            <div>1-3 working days</div>
+            <div>{`€ ${Number(itemDetails?.deliveryCharge).toFixed(2)}`}</div>
           </DeliveryInfoRow>
           <p>Premium Delivery</p>
         </DeliveryInfo>
         <DeliveryInfo>
           <LocalShippingOutlinedIcon />
           <DeliveryInfoRow>
-            <div>3-6 working days</div>
+            <div>4-7 working days</div>
             <div>free</div>
           </DeliveryInfoRow>
           <p>Standard Delivery</p>

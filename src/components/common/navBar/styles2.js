@@ -10,7 +10,7 @@ export const Container = styled.div`
 export const NavBarWrapper = styled.nav`
   background-color: #efeff0;
   width: 100%;
-  padding: 0 15px;
+  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -47,15 +47,4 @@ export const NavElements = styled.ul`
     height: 2px;
     background-color: #574c4c;
   }
-`;
-
-export const Menu = styled.div`
-  display: none;
-  position: absolute;
-  top: 0.75rem;
-  right: 0.5rem;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 2.25rem;
-  height: 2rem;
 `;

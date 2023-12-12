@@ -1,18 +1,20 @@
 import { useSelector } from 'react-redux';
 import { CartContainer, CartItemsWrapper, CartSummary, SummaryLine } from './styles';
-import { PrimaryBtn } from '../../common/button';
+import { PrimaryBtn, SecondaryBtn } from '../../common/button';
 import { LABEL_GO_TO_CHECKOUT } from '../../../constants/AppConstants';
 import CartItemCard from '../../common/cartItemCard';
 import defaultTheme from './../../../theme/index';
 import { Modal } from 'antd';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { calTotalDeliveryCharge } from '../../../utils';
 
 const Cart = () => {
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
   const cartData = useSelector((state) => state?.cart);
   const auth = useSelector((state) => state.auth);
+  const totalDeliveryCharge = calTotalDeliveryCharge(cartData.cartItems);
 
   const checkoutHandler = () => {
     if (!auth) {
@@ -25,14 +27,27 @@ const Cart = () => {
       <Modal
         title="Sign in Required"
         open={showModal}
-        onOk={() => {
-          navigate('/sign-in');
-        }}
         onCancel={() => {
-          navigate('/register');
+          setShowModal(false);
         }}
-        okText="Sign in"
-        cancelText="Register"
+        footer={[
+          <SecondaryBtn
+            key="register"
+            onClick={() => {
+              navigate('/register');
+            }}
+          >
+            Register
+          </SecondaryBtn>,
+          <PrimaryBtn
+            key="sign-in"
+            onClick={() => {
+              navigate('/sign-in');
+            }}
+          >
+            Sign in
+          </PrimaryBtn>,
+        ]}
       >
         Please login to proceed with the checkout.
       </Modal>
@@ -60,11 +75,11 @@ const Cart = () => {
               </SummaryLine>
               <SummaryLine>
                 <p>Delivery</p>
-                <p>{`${Number(5).toFixed(2)} €`}</p>
+                <p>{`${Number(totalDeliveryCharge).toFixed(2)} €`}</p>
               </SummaryLine>
               <SummaryLine style={{ fontWeight: 'bold' }}>
                 <p>Total (VAT included)</p>
-                <p>{`${Number(cartData.totalPrice + 5).toFixed(2)} €`}</p>
+                <p>{`${Number(cartData.totalPrice + totalDeliveryCharge).toFixed(2)} €`}</p>
               </SummaryLine>
               <PrimaryBtn
                 style={{

@@ -213,5 +213,3 @@ items.forEach((el) => {
   el.deliveryCharge = calDeliveryCharge(el.price);
   el.discountRate = discountArr[Math.floor(Math.random() * discountArr.length)];
 });
-
-console.log(items);

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Image = styled.img`
   max-width: 100%;
@@ -11,6 +11,8 @@ export const ItemDescription = styled.div`
   position: absolute;
   display: flex;
   flex-direction: column;
-  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
   bottom: 5%;
 `;

@@ -2,7 +2,7 @@ import { Carousel } from 'antd';
 import Banner from '../../common/banner';
 import Item from '../../common/itemCard';
 import { ItemsWrapper } from './styles';
-import { bannerData } from './BannerData';
+import { bannerData } from './../../../assets/db/BannerData';
 import { useSelector } from 'react-redux';
 
 const Home = () => {
@@ -13,7 +13,7 @@ const Home = () => {
   return (
     <>
       <Carousel autoplay speed={500}>
-        {bannerData.map((el, index) => {
+        {Object.values(bannerData).map((el, index) => {
           return <Banner key={index} bannerData={el} />;
         })}
       </Carousel>

@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import styled from 'styled-components';
+import defaultTheme from './../../../theme/DefaultTheme';
 
 export const Container = styled.div`
   display: flex;
@@ -20,6 +21,17 @@ export const Description = styled.div``;
 
 export const Price = styled.h3``;
 
+export const DiscountedPrice = styled.h3`
+  color: ${defaultTheme.colors.red};
+  margin-bottom: 0;
+`;
+
+export const OriginalPrice = styled.h4`
+  margin-top: 0;
+  color: ${defaultTheme.colors.darkGray};
+  font-weight: 400;
+`;
+
 export const Rating = styled.div`
   display: flex;
   align-items: center;
@@ -27,7 +39,7 @@ export const Rating = styled.div`
 
 export const RatingCount = styled.p`
   margin-left: 10px;
-  color: grey;
+  color: ${defaultTheme.colors.darkGray};
 `;
 
 export const DeliveryInfo = styled.div`
@@ -42,6 +54,6 @@ export const DeliveryInfoRow = styled.div`
 `;
 
 export const FastDeliveryIcon = styled.span`
-  display: "flex";
-  align-items: "center";
+  display: 'flex';
+  align-items: 'center';
 `;

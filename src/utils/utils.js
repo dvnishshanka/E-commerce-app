@@ -26,3 +26,17 @@ export const filterItems = (itemArr, keyData, value) => {
   const filteredItems = itemArr.filter((item) => item[keyData] === value);
   return filteredItems;
 };
+
+// Filter sale items from the item array
+export const filterSaleItems = (itemArr) => {
+  const filteredItems = itemArr.filter((item) => item.discountRate > 0);
+  return filteredItems;
+};
+
+// Calculate total delivery charge
+export const calTotalDeliveryCharge = (cartArr) => {
+  const calTotalDelivery = cartArr.reduce((acc, currentVal) => {
+    return acc + currentVal.deliveryCharge;
+  }, 0);
+  return calTotalDelivery;
+};

@@ -1,6 +1,6 @@
-import { ADD_TO_CART, REMOVE_FROM_CART } from "../actions";
-import initialState from "./InitialState";
-import { findItemIndexFromID } from "../utils";
+import { ADD_TO_CART, REMOVE_FROM_CART } from '../actions';
+import initialState from './InitialState';
+import { findItemIndexFromID } from '../utils';
 
 export const cartReducer = (state = initialState.cart, action) => {
   // Find index of the product in the cart array
@@ -13,7 +13,7 @@ export const cartReducer = (state = initialState.cart, action) => {
         ...state,
         cartItems: [...state.cartItems, { ...action.item, qty: 1 }],
         totalQty: state.totalQty + 1,
-        totalPrice: state.totalPrice + action.item?.price,
+        totalPrice: state.totalPrice + action.item?.price * (1 - action.item?.discountRate / 100),
       };
     // If the item is already in the cart
     else {
@@ -24,11 +24,9 @@ export const cartReducer = (state = initialState.cart, action) => {
 
       return {
         ...state,
-        cartItems: state.cartItems.map((el, index) =>
-          index === itemIndex ? updatedItem : el
-        ),
+        cartItems: state.cartItems.map((el, index) => (index === itemIndex ? updatedItem : el)),
         totalQty: state.totalQty + 1,
-        totalPrice: state.totalPrice + action.item?.price,
+        totalPrice: state.totalPrice + action.item?.price * (1 - action.item?.discountRate / 100),
       };
     }
   } else if (action.type === REMOVE_FROM_CART) {
@@ -36,19 +34,14 @@ export const cartReducer = (state = initialState.cart, action) => {
     if (itemIndex >= 0) {
       const updatedItem = {
         ...state.cartItems[itemIndex],
-        qty:
-          state.cartItems[itemIndex].qty > 0
-            ? state.cartItems[itemIndex].qty - 1
-            : 0,
+        qty: state.cartItems[itemIndex].qty > 0 ? state.cartItems[itemIndex].qty - 1 : 0,
       };
 
       return {
         ...state,
         totalQty: state.totalQty - 1,
-        totalPrice: state.totalPrice - action.item?.price,
-        cartItems: state.cartItems.map((el, index) =>
-          index === itemIndex ? updatedItem : el
-        ),
+        totalPrice: state.totalPrice - action.item?.price * (1 - action.item?.discountRate / 100),
+        cartItems: state.cartItems.map((el, index) => (index === itemIndex ? updatedItem : el)),
       };
     }
   }

@@ -29,7 +29,7 @@ const ItemCard = ({ itemDetails }) => {
       hoverable
       style={{
         width: 240,
-        height: 400,
+        height: 500,
         position: 'relative',
       }}
     >
