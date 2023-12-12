@@ -19,7 +19,7 @@ import { auth, db } from '../../../auth/firebase';
 import { PrimaryBtn } from './../../common/button/styles';
 import { FormInput, FormInputPassword } from '../../common/input';
 import { ref, set } from 'firebase/database';
-import { items } from '../../../assets/db/items';
+// import { items } from '../../../assets/db/items';
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -38,7 +38,7 @@ const SignUp = () => {
     set(referance, userData);
   };
 
-  const writeUserData2 = (items) => {
+  /*const writeUserData2 = (items) => {
     items.forEach((i) => {
       const referance = ref(db, 'items/' + i.id);
       // const userData = {
@@ -54,7 +54,7 @@ const SignUp = () => {
 
       set(referance, i);
     });
-  };
+  };*/
 
   const onFinish = (values) => {
     createUserWithEmailAndPassword(auth, values.email, values.password)
