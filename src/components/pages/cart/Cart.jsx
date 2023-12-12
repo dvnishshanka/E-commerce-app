@@ -43,7 +43,7 @@ const Cart = () => {
             <img
               src={!auth ? LoginIcon : CheckoutSuccessIcon}
               alt={auth ? 'Sign in' : 'Empty Cart'}
-              style={{ width: '20vw' }}
+              style={{ height: '20vh' }}
             />
           }
           extra={
@@ -80,7 +80,7 @@ const Cart = () => {
         <Result
           status="info"
           title="Your shopping cart is empty!"
-          icon={<img src={ResultIcon} alt="Empty Cart" style={{ width: '20vw' }} />}
+          icon={<img src={ResultIcon} alt="Empty Cart" style={{ height: '20vh' }} />}
           extra={
             <PrimaryBtn type="primary" onClick={() => navigate('/')}>
               Back Home

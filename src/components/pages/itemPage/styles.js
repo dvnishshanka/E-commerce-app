@@ -3,11 +3,11 @@ import defaultTheme from './../../../theme/DefaultTheme';
 
 export const Container = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   padding: 40px;
 `;
 export const Image = styled.img`
-  width: 40%;
+  width: 20%;
 `;
 
 export const ItemInfo = styled.div`
