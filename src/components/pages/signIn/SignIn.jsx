@@ -7,7 +7,7 @@ import {
   INCORRECT_EMAIL_OR_PASSWORD,
   FIREBASE_ERR_INVALID_CREDENTIAL,
   SOMETHING_WENT_WRONG,
-  SIGNED_IN_SUCCESSFUL
+  SIGNED_IN_SUCCESSFUL,
 } from '../../../constants/AppConstants';
 import { Link, useNavigate } from 'react-router-dom';
 import { Title } from './styles';
@@ -30,7 +30,7 @@ const SignIn = () => {
         navigate('/');
         messageApi.open({
           type: 'success',
-          content: SIGNED_IN_SUCCESSFUL
+          content: SIGNED_IN_SUCCESSFUL,
         });
       })
       .catch((error) => {
@@ -41,7 +41,7 @@ const SignIn = () => {
 
         messageApi.open({
           type: 'error',
-          content: errorMessage
+          content: errorMessage,
         });
       });
   };
@@ -50,7 +50,7 @@ const SignIn = () => {
   const onFinishFailed = (errorInfo) => {
     messageApi.open({
       type: 'error',
-      content: errorInfo?.errorFields[0]?.errors[0] || INCORRECT_EMAIL_OR_PASSWORD
+      content: errorInfo?.errorFields[0]?.errors[0] || INCORRECT_EMAIL_OR_PASSWORD,
     });
   };
 
@@ -65,32 +65,34 @@ const SignIn = () => {
           marginRight: 'auto',
           border: '2px solid light-gray',
           borderRadius: '5px',
-          padding: '10px 20px '
+          padding: '10px 20px ',
         }}
         onFinish={onSubmit}
         onFinishFailed={onFinishFailed}
-        layout="vertical">
+        layout="vertical"
+      >
         <Title>{LABEL_WELCOME_BACK}</Title>
-
         <Form.Item
           name="email"
           label="E-mail"
           rules={[
             {
               type: 'email',
-              message: 'The input is not valid E-mail!'
+              message: 'The input is not valid E-mail!',
             },
             {
               required: true,
-              message: 'Please input your E-mail!'
-            }
-          ]}>
+              message: 'Please input your E-mail!',
+            },
+          ]}
+        >
           <FormInput />
         </Form.Item>
         <Form.Item
           name="password"
           label={LABEL_PASSWORD}
-          rules={[{ required: true, message: 'Please input your Password!' }]}>
+          rules={[{ required: true, message: 'Please input your Password!' }]}
+        >
           <FormInputPassword />
         </Form.Item>
         <Form.Item shouldUpdate>
@@ -101,14 +103,15 @@ const SignIn = () => {
               disabled={
                 !form.isFieldsTouched(true) ||
                 !!form.getFieldsError().filter(({ errors }) => errors.length).length
-              }>
+              }
+            >
               {LABEL_SIGN_IN}
             </PrimaryBtn>
           )}
         </Form.Item>
         <Form.Item>
           <p>
-            ${"Don't have an account?"}
+            Don't have an account?
             <Link to={'/register'}> {LABEL_REGISTER_NOW}</Link>
           </p>
         </Form.Item>

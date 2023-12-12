@@ -8,15 +8,17 @@ const Banner = ({ bannerData, showBtn = true }) => {
       style={{
         backgroundColor: bannerData?.bgColor && bannerData?.bgColor,
         color: bannerData.txtColor,
-        // backgroundImage: `url(${bannerData.bgImage})`,
       }}
     >
       <InfoWrapper>
         {bannerData.title && <Title> {bannerData.title}</Title>}
         {bannerData.subTitle && <SubTitle> {bannerData.subTitle}</SubTitle>}
         {bannerData.caption && <Description>{bannerData.caption}</Description>}
-        {showBtn && (
-          <Link style={{ fontSize: '1.2rem', color: bannerData.txtColor }}>
+        {showBtn && bannerData.category && (
+          <Link
+            style={{ fontSize: '1.2rem', color: bannerData.txtColor }}
+            to={`/${bannerData.category}`}
+          >
             {bannerData.btnText} <ArrowRightOutlined />
           </Link>
         )}

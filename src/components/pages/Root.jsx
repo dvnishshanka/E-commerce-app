@@ -5,18 +5,21 @@ import defaultTheme from '../../theme';
 
 const Root = () => {
   return (
-    <div style={{ minHeight: '100vh' }}>
+    <div>
       <NavBar />
       <main
         style={{
           backgroundColor: `${defaultTheme.colors.lightGray}`,
           // paddingBottom: "30px",
           // margin: "0",
+          minHeight: '50vh',
         }}
       >
         <Outlet />
       </main>
-      <Footer />
+      <footer>
+        <Footer />
+      </footer>
     </div>
   );
 };

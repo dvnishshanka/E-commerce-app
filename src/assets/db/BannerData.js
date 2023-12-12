@@ -7,6 +7,7 @@ export const bannerData = {
   sale: {
     image: saleBanner,
     name: 'sale',
+    category: 'sale',
     title: '🎊 Clearance Sale 🎊',
     subTitle: 'Last Chance to Bag Bargains!',
     caption:
@@ -20,6 +21,7 @@ export const bannerData = {
   jewelery: {
     image: jewelleryBanner,
     name: 'jewellery and other accessories',
+    category: 'jewelery',
     title: 'Elegance Redefined 💍',
     subTitle: 'Unlock Your Radiance',
     caption:
@@ -33,6 +35,7 @@ export const bannerData = {
   "women's clothing": {
     image: ladiesDressBanner,
     name: 'clothing',
+    category: "women's clothing",
     title: 'Elevate Your Wardrobe 👗',
     subTitle: ' Where Style Meets Comfort',
     caption:
@@ -45,7 +48,7 @@ export const bannerData = {
   default: {
     image: defaultBanner,
     name: 'default',
-    title: 'Discover Your Style, Shop with Ease',
+    title: 'Discover Your Style, Shop with Ease 👜',
     subTitle: '',
     caption: 'Explore Trendy Collections & Unbeatable Deals.',
     btnText: 'Discover now',

@@ -1,77 +1,94 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { CartContainer, CartItemsWrapper, CartSummary, SummaryLine } from './styles';
 import { PrimaryBtn, SecondaryBtn } from '../../common/button';
 import { LABEL_GO_TO_CHECKOUT } from '../../../constants/AppConstants';
 import CartItemCard from '../../common/cartItemCard';
 import defaultTheme from './../../../theme/index';
-import { Modal } from 'antd';
+import { Result } from 'antd';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { calTotalDeliveryCharge } from '../../../utils';
+import ResultIcon from '../../../assets/images/empty-cart.png';
+import CheckoutSuccessIcon from '../../../assets/images/checkout-success.png';
+import LoginIcon from '../../../assets/images/login.png';
+import { CLEAR_CART } from '../../../actions';
 
 const Cart = () => {
-  const [showModal, setShowModal] = useState(false);
+  const [showChkoutMsg, setShowChkoutMsg] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const cartData = useSelector((state) => state?.cart);
   const auth = useSelector((state) => state.auth);
   const totalDeliveryCharge = calTotalDeliveryCharge(cartData.cartItems);
 
   const checkoutHandler = () => {
-    setShowModal(true);
-  };
-
-  const closeModal = () => {
-    setShowModal(false);
+    setShowChkoutMsg(true);
+    if (auth) {
+      dispatch({ type: CLEAR_CART, payload: null });
+    }
   };
 
   return (
     <>
-      <Modal
-        title={!auth && 'Sign in Required'}
-        open={showModal}
-        onCancel={closeModal}
-        footer={
-          !auth ? (
-            [
-              <SecondaryBtn
-                key="register"
-                onClick={() => {
-                  navigate('/register');
-                }}
-              >
-                Register
-              </SecondaryBtn>,
-              <PrimaryBtn
-                key="sign-in"
-                onClick={() => {
-                  navigate('/sign-in');
-                }}
-              >
-                Sign in
-              </PrimaryBtn>,
-            ]
-          ) : (
-            <PrimaryBtn
-              key="cancel"
-              onClick={() => {
-                closeModal();
-                navigate('/');
-              }}
-            >
-              Close
+      {showChkoutMsg && (
+        <Result
+          status={!auth ? 'info' : 'success'}
+          title={!auth ? 'Sign in Required' : 'Order placed successfully'}
+          subTitle={
+            auth
+              ? 'Payment feature is currently under construction.'
+              : 'Please sign in to proceed with the checkout.'
+          }
+          icon={
+            <img
+              src={!auth ? LoginIcon : CheckoutSuccessIcon}
+              alt={auth ? 'Sign in' : 'Empty Cart'}
+              style={{ width: '20vw' }}
+            />
+          }
+          extra={
+            auth ? (
+              <PrimaryBtn type="primary" onClick={() => navigate('/')}>
+                Back Home
+              </PrimaryBtn>
+            ) : (
+              <>
+                <SecondaryBtn
+                  key="register"
+                  onClick={() => {
+                    navigate('/register');
+                  }}
+                >
+                  Register
+                </SecondaryBtn>
+
+                <PrimaryBtn
+                  key="sign-in"
+                  onClick={() => {
+                    navigate('/sign-in');
+                  }}
+                >
+                  Sign in
+                </PrimaryBtn>
+              </>
+            )
+          }
+        />
+      )}
+
+      {!showChkoutMsg && cartData?.totalQty === 0 ? (
+        <Result
+          status="info"
+          title="Your shopping cart is empty!"
+          icon={<img src={ResultIcon} alt="Empty Cart" style={{ width: '20vw' }} />}
+          extra={
+            <PrimaryBtn type="primary" onClick={() => navigate('/')}>
+              Back Home
             </PrimaryBtn>
-          )
-        }
-      >
-        {!auth
-          ? 'Please login to proceed with the checkout.'
-          : "We're sorry, but this feature is currently under construction."}
-      </Modal>
-      {cartData?.totalQty === 0 ? (
-        <CartContainer>
-          <h2>Your shopping cart is empty</h2>
-        </CartContainer>
+          }
+        />
       ) : (
+        !showChkoutMsg &&
         cartData?.totalQty > 0 && (
           <CartContainer>
             <CartItemsWrapper>

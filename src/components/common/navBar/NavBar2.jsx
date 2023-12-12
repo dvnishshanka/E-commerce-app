@@ -6,11 +6,13 @@ import { auth } from '../../../auth';
 import { NavBarWrapper } from './styles2';
 import AppMenu from './AppMenu';
 import AppSubMenu from './AppSubMenu';
+import { useNavigate } from 'react-router-dom';
 
 const NavBar = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const items = useSelector((state) => state.items);
   const allCategories = [...new Set(items.map((item) => item.category))];
+  const navigate = useNavigate();
 
   const userDetails = useSelector((state) => {
     return state.auth;
@@ -24,6 +26,7 @@ const NavBar = () => {
           type: 'success',
           content: SIGNED_OUT_SUCCESSFULLY,
         });
+        navigate('/');
       })
       .catch((error) => {
         console.log(error);

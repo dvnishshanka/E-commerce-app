@@ -1,4 +1,4 @@
-import { ADD_TO_CART, REMOVE_FROM_CART } from '../actions';
+import { ADD_TO_CART, CLEAR_CART, REMOVE_FROM_CART } from '../actions';
 import initialState from './InitialState';
 import { findItemIndexFromID } from '../utils';
 
@@ -44,6 +44,8 @@ export const cartReducer = (state = initialState.cart, action) => {
         cartItems: state.cartItems.map((el, index) => (index === itemIndex ? updatedItem : el)),
       };
     }
+  } else if (action.type === CLEAR_CART) {
+    return initialState.cart;
   }
   return state;
 };
