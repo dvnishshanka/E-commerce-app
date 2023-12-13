@@ -44,7 +44,7 @@ export const calTotalDeliveryCharge = (cartArr) => {
 
 // Format price with currency symbol
 export const formatPrice = (price)=>{
-  return `€ ${Number(price).toFixed(2)}`
+  return `${EURO} ${Number(price).toFixed(2)}`
 }
 
 // Calculate price after discount

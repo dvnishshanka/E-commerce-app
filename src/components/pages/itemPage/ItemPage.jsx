@@ -6,7 +6,6 @@ import { calFinalPrice, findItemFromID, formatPrice, getOrderedItemQty } from '.
 import WavesOutlinedIcon from '@mui/icons-material/WavesOutlined';
 import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
 import BtnAddCart from '../../common/btnAddCart';
-import defaultTheme from './../../../theme/index';
 import QtyChanger from '../../common/qtyChanger';
 import {
   Container,
