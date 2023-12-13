@@ -1,5 +1,6 @@
 .socialMedia {
   &:hover {
-    color: lightgray;
+    color: '#efeff0';
+    cursor: pointer;
   }
 }

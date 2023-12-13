@@ -1,33 +1,33 @@
 import styled from 'styled-components';
+import defaultTheme from './../../../theme/index';
 
 export const FooterContainer = styled.div`
-  /* position: fixed; */
-  /* bottom: 0; */
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  background-color: #001529;
-  color: gray;
+  background-color: ${defaultTheme.colors.darkPurple};
+  color: ${defaultTheme.colors.lightGray};
   padding: 30px;
-  width: 100%;
 `;
 
 export const Title = styled.div`
   height: 30px;
   text-decoration: underline;
   text-underline-offset: 5px;
-  color: #b2abab;
+  color: ${defaultTheme.colors.lightGray} !important;
 `;
 
 export const InfoColumn = styled.div`
   display: flex;
   flex-direction: column;
-  flex: 1;
+  flex: 0.5;
 
-  li {
+  li, a {
+    color: ${defaultTheme.colors.lightGray};
+    font-weight: normal;
     padding-bottom: 5px;
     &:hover {
-      color: lightgray;
+      color: ${defaultTheme.colors.white};
       text-decoration: underline;
       text-underline-offset: 4px;
     }

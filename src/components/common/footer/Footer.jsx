@@ -26,14 +26,11 @@ const Footer = () => {
 
   return (
     <FooterContainer>
-      <InfoColumn style={{ flex: '2' }}>
-        <Title>
-          <Logo style={{ marginTop: '0' }} />
-        </Title>
+      <InfoColumn style={{ flex: '1.5' }}>
+          <Logo style={{ marginTop: '0', color: "red" }} />
         <p style={{ paddingRight: '50px' }}>
           Explore our wide range of products and discover the perfect fit for your needs. Shop with
-          confidence, backed by our quality guarantee. Enjoy hassle-free returns, secure checkout,
-          and swift delivery to your doorstep. Join our community today and experience the
+          confidence, backed by our quality guarantee. Join our community today and experience the
           convenience of seamless online shopping. Your satisfaction is our priority!
         </p>
         <SocialMedia>
@@ -42,22 +39,22 @@ const Footer = () => {
           <InstagramFilled style={socialMediaStyles} className={styles.socialMedia} />
         </SocialMedia>
       </InfoColumn>
-      <InfoColumn style={{ flex: '1' }}>
+      <InfoColumn >
         <Title> PRODUCTS</Title>
         <ul style={listStyles}>
           {allCategories.map((category, index) => {
             return (
               <li key={index}>
-                <NavLink to={`/${category}`}>{category}</NavLink>
+                <NavLink to={`/${category}`} style={{textDecoration: "none"}}>{category}</NavLink>
               </li>
             );
           })}
           <li key="sale">
-            <NavLink to={`/sale`}>Sale %</NavLink>
+            <NavLink to={`/sale`} style={{textDecoration: "none"}}>Sale %</NavLink>
           </li>
         </ul>
       </InfoColumn>
-      <InfoColumn style={{ flex: '1.5' }}>
+      <InfoColumn>
         <Title>CONTACTS</Title>
         <ul style={listStyles}>
           <li>

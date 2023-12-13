@@ -8,6 +8,7 @@ const defaultTheme = {
     green: '#00875a',
     white: '#efeff0',
     purple: '#6328e0',
+    darkPurple: "#3b1886",
     yellow: 'rgb(255, 105, 0)',
   },
 };
