@@ -1,70 +1,57 @@
-# Getting Started with Create React App
+# FlexiCart E-commerce App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Basic 2D game in which a bird can go to the nest after eating all cherries.
 
-## Available Scripts
+**Technologies**
 
-In the project directory, you can run:
+[![My Skills](https://skillicons.dev/icons?i=react)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=html)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=redux)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=firebase)](https://skillicons.dev)
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+**Features**
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- The bird’s goal is to collect all cherries present on the map, then go inside the nest chosing the shortest possible route.
+- Customers can browse and shop for various products available on the platform.
+User-friendly navigation allows seamless movement through the website to explore and purchase items.
+Intuitive controls enable customers to interact with the platform effortlessly.
+Secure and reliable checkout process for a smooth purchasing experience.
+Detailed product descriptions and images to aid in informed decision-making.
+Personalized recommendations and a user-centric experience tailored to individual preferences.
 
-### `npm test`
+  Product Listings
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The website showcases an extensive range of products, each with detailed descriptions and visuals.
+Products are categorized logically to facilitate easy navigation for users.
+User Interaction
 
-### `npm run build`
+Customers can add items to their cart for later purchase and manage their selections effortlessly.
+Smooth transitions and responsive design ensure a pleasant experience across different devices.
+Interactive elements engage users, creating an enjoyable shopping journey.
+Usage
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Visit the website: FlexiCart E-commerce (Replace "#" with the actual website URL)
+Explore various categories and discover a diverse selection of products.
+Add desired items to your cart and proceed securely through the checkout process.
+Experience a seamless shopping journey with our user-friendly platform.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+**Usage**
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Compile and create the executables
+  ```
+  make
+  ```
+- Start the game
+  ```
+  ./so_long <map file path>
+  ```
+  Example
+  ```
+  ./so_long maps/big_mapv.ber
+  ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**Resources**
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
