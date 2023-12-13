@@ -16,7 +16,6 @@ const CategoryPage = () => {
   return (
     <div>
       <Banner bannerData={bannerData[category] || bannerData.default} showBtn={false} />
-      <h2>{category}</h2>
       <ItemsWrapper>
         {filteredItems.map((item) => {
           return <Item items={items} key={item.id} itemDetails={item} />;
