@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import styled from 'styled-components';
+import defaultTheme from '../../../theme';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -19,3 +20,17 @@ export const ItemDescription = styled.div`
   width: 80%;
   bottom: 5%;
 `;
+
+export const DiscountedPrice = styled.h3`
+  color: ${defaultTheme.colors.red};
+  margin-bottom: 0;
+`;
+
+export const OriginalPriceWrapper = styled.p`
+  margin-top: 0;
+`;
+export const OriginalPrice = styled.span`
+  text-decoration: line-through;
+`;
+
+export const Price = styled.h3``;

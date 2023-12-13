@@ -26,11 +26,12 @@ export const DiscountedPrice = styled.h3`
   margin-bottom: 0;
 `;
 
-export const OriginalPrice = styled.h4`
-  margin-top: 0;
-  color: ${defaultTheme.colors.darkGray};
-  font-weight: 400;
-`;
+export const OriginalPriceWrapper = styled.p`
+margin-top: 0;
+`
+export const OriginalPrice = styled.span`
+text-decoration: line-through;
+`
 
 export const Rating = styled.div`
   display: flex;

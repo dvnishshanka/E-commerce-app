@@ -1,12 +1,13 @@
 import { Card } from 'antd';
-import { ItemDescription, Image, Wrapper } from './styles';
+import { ItemDescription, Image, Wrapper, OriginalPrice, OriginalPriceWrapper, DiscountedPrice, Price } from './styles';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { ADD_TO_CART, REMOVE_FROM_CART } from './../../../actions/ActionTypes';
-import { findItemFromID, getOrderedItemQty } from '../../../utils';
+import { calFinalPrice, findItemFromID, formatPrice, getOrderedItemQty } from '../../../utils';
 import BtnAddCart from '../btnAddCart';
 import QtyChanger from '../qtyChanger';
 import defaultTheme from '../../../theme';
+import DiscountTag from '../../discountTag';
 
 const CartItemCard = ({ item }) => {
   const dispatch = useDispatch();
@@ -45,11 +46,18 @@ const CartItemCard = ({ item }) => {
         <ItemDescription>
           {item.title && <h4>{item.title}</h4>}
           {item.category && <p style={{ margin: 0 }}>{item.category}</p>}
-          {item.price && (
-            <p style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
-              {`€ ${Number(item.price).toFixed(2)}`} / item
-            </p>
-          )}
+          { item.discountRate > 0 ?
+            <><DiscountedPrice>
+              {formatPrice(calFinalPrice(item.price, item.discountRate))} / item
+            </DiscountedPrice>
+           <OriginalPriceWrapper>
+              Originally:
+              <OriginalPrice>
+                {formatPrice(item.price)}
+                 <DiscountTag description={`${item.discountRate}% OFF`}/>
+              </OriginalPrice>
+            </OriginalPriceWrapper></>
+            : <Price>{formatPrice(item.price)} / item</Price>}
           {noOfItems > 0 ? (
             <QtyChanger
               removeFromCartHandler={removeFromCartHandler}

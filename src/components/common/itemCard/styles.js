@@ -16,3 +16,17 @@ export const ItemDescription = styled.div`
   width: 80%;
   bottom: 5%;
 `;
+
+export const ItemTitle = styled.h4`
+font-weight: 500;
+`
+export const FinalPrice = styled.p`
+font-weight: bold;
+margin-bottom: 0;
+`
+export const OriginalPriceWrapper = styled.p`
+margin-top: 0;
+`
+export const OriginalPrice = styled.span`
+text-decoration: line-through;
+`

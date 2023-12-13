@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { Rate } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { ADD_TO_CART, REMOVE_FROM_CART } from '../../../actions';
-import { findItemFromID, getOrderedItemQty } from '../../../utils';
+import { calFinalPrice, findItemFromID, formatPrice, getOrderedItemQty } from '../../../utils';
 import WavesOutlinedIcon from '@mui/icons-material/WavesOutlined';
 import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
 import BtnAddCart from '../../common/btnAddCart';
@@ -22,7 +22,9 @@ import {
   OriginalPrice,
   DiscountedPrice,
   DeliveryInfo,
+  OriginalPriceWrapper,
 } from './styles';
+import DiscountTag from '../../discountTag';
 
 const ItemPage = () => {
   const dispatch = useDispatch();
@@ -49,26 +51,22 @@ const ItemPage = () => {
       <ItemInfo>
         <Title>{itemDetails.title}</Title>
         <Description>{itemDetails.description}</Description>
-
         {itemDetails.discountRate > 0 ? (
           <>
-            <DiscountedPrice>{`€ ${Number(
-              itemDetails.price * (1 - itemDetails.discountRate / 100),
-            ).toFixed(2)}`}</DiscountedPrice>
-            <OriginalPrice>
+            <DiscountedPrice>
+              {formatPrice(calFinalPrice(itemDetails.price, itemDetails.discountRate))}
+            </DiscountedPrice>
+            <OriginalPriceWrapper>
               Originally:
-              <span style={{ textDecoration: 'line-through' }}>{` € ${Number(
-                itemDetails.price,
-              ).toFixed(2)}`}</span>
-              <span style={{ color: `${defaultTheme.colors.black}`, fontWeight: 'bold' }}>
-                {` ${itemDetails.discountRate}%`}{' '}
-              </span>
-            </OriginalPrice>
+              <OriginalPrice>{formatPrice(
+                itemDetails.price)}
+                 <DiscountTag description={`${itemDetails.discountRate}% OFF`}/>
+              </OriginalPrice>
+            </OriginalPriceWrapper>
           </>
         ) : (
-          <Price>{`€ ${Number(itemDetails.price).toFixed(2)}`}</Price>
+          <Price>{formatPrice(itemDetails.price)}</Price>
         )}
-
         <Rating>
           <Rate disabled allowHalf defaultValue={itemDetails.rating.rate} />
           <RatingCount>{`(${itemDetails.rating.count}) reviews`}</RatingCount>
@@ -89,7 +87,7 @@ const ItemPage = () => {
           </FastDeliveryIcon>
           <DeliveryInfoRow>
             <div>1-3 working days</div>
-            <div>{`€ ${Number(itemDetails?.deliveryCharge).toFixed(2)}`}</div>
+            <div>{formatPrice(itemDetails?.deliveryCharge)}</div>
           </DeliveryInfoRow>
           <p>Premium Delivery</p>
         </DeliveryInfo>

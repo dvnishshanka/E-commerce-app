@@ -1,4 +1,5 @@
 const ZERO_ITEMS_IN_CART = 0;
+const EURO = "€";
 
 export const findItemFromID = (itemID, itemArr) => {
   return itemArr.find((item) => Number(itemID) === item.id);
@@ -40,3 +41,13 @@ export const calTotalDeliveryCharge = (cartArr) => {
   }, 0);
   return calTotalDelivery;
 };
+
+// Format price with currency symbol
+export const formatPrice = (price)=>{
+  return `€ ${Number(price).toFixed(2)}`
+}
+
+// Calculate price after discount
+export const calFinalPrice = (originalPrice, discounRate)=>{
+  return originalPrice - (discounRate/100)*originalPrice;
+}

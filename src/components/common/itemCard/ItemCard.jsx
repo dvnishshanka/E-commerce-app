@@ -1,16 +1,17 @@
 import { Card } from 'antd';
-import { ItemDescription, Image } from './styles';
+import { ItemDescription, Image, FinalPrice,ItemTitle,OriginalPrice, OriginalPriceWrapper } from './styles';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { ADD_TO_CART, REMOVE_FROM_CART } from './../../../actions/ActionTypes';
-import { findItemFromID, getOrderedItemQty } from '../../../utils';
+import { findItemFromID, getOrderedItemQty, formatPrice, calFinalPrice } from '../../../utils';
 import BtnAddCart from '../btnAddCart';
 import QtyChanger from '../qtyChanger';
+import DiscountTag from '../../discountTag';
 
 const ItemCard = ({ itemDetails }) => {
   const dispatch = useDispatch();
   const items = useSelector((state) => state.items);
-  const { title, id, price, image } = itemDetails;
+  const { title, id, price, image, discountRate } = itemDetails;
 
   const noOfItems = useSelector((state) => {
     return getOrderedItemQty(id, state.cart.cartItems);
@@ -37,8 +38,10 @@ const ItemCard = ({ itemDetails }) => {
         <Image src={image} alt={title} />
       </Link>
       <ItemDescription>
-        {title && <h4>{title}</h4>}
-        {price && <p>{`€ ${Number(price).toFixed(2)}`}</p>}
+        {title && <ItemTitle>{title}</ItemTitle>}
+       
+        {price && <FinalPrice>{formatPrice(calFinalPrice(price, discountRate))} {discountRate > 0 && <DiscountTag description={`DEAL ${discountRate}% off`}/>}</FinalPrice>}
+        {discountRate > 0 && <OriginalPriceWrapper>Originally: <OriginalPrice>{formatPrice(price)}</OriginalPrice> </OriginalPriceWrapper>}
         {noOfItems > 0 ? (
           <QtyChanger
             removeFromCartHandler={removeFromCartHandler}
