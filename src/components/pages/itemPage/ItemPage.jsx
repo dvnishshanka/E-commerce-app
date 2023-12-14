@@ -56,10 +56,10 @@ const ItemPage = () => {
               {formatPrice(calFinalPrice(itemDetails.price, itemDetails.discountRate))}
             </DiscountedPrice>
             <OriginalPriceWrapper>
-              Originally:
-              <OriginalPrice>{formatPrice(
-                itemDetails.price)}
-                 <DiscountTag description={`${itemDetails.discountRate}% OFF`}/>
+              Originally:{' '}
+              <OriginalPrice>
+                {formatPrice(itemDetails.price)}
+                <DiscountTag description={`${itemDetails.discountRate}% OFF`} />
               </OriginalPrice>
             </OriginalPriceWrapper>
           </>

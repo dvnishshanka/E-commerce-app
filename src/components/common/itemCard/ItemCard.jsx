@@ -1,5 +1,12 @@
 import { Card } from 'antd';
-import { ItemDescription, Image, FinalPrice,ItemTitle,OriginalPrice, OriginalPriceWrapper } from './styles';
+import {
+  ItemDescription,
+  Image,
+  FinalPrice,
+  ItemTitle,
+  OriginalPrice,
+  OriginalPriceWrapper,
+} from './styles';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { ADD_TO_CART, REMOVE_FROM_CART } from './../../../actions/ActionTypes';
@@ -39,9 +46,17 @@ const ItemCard = ({ itemDetails }) => {
       </Link>
       <ItemDescription>
         {title && <ItemTitle>{title}</ItemTitle>}
-       
-        {price && <FinalPrice>{formatPrice(calFinalPrice(price, discountRate))} {discountRate > 0 && <DiscountTag description={`DEAL ${discountRate}% off`}/>}</FinalPrice>}
-        {discountRate > 0 && <OriginalPriceWrapper>Originally: <OriginalPrice>{formatPrice(price)}</OriginalPrice> </OriginalPriceWrapper>}
+        {price && (
+          <FinalPrice>
+            {formatPrice(calFinalPrice(price, discountRate))}{' '}
+            {discountRate > 0 && <DiscountTag description={`DEAL ${discountRate}% off`} />}
+          </FinalPrice>
+        )}
+        {discountRate > 0 && (
+          <OriginalPriceWrapper>
+            Originally: <OriginalPrice>{formatPrice(price)}</OriginalPrice>{' '}
+          </OriginalPriceWrapper>
+        )}
         {noOfItems > 0 ? (
           <QtyChanger
             removeFromCartHandler={removeFromCartHandler}

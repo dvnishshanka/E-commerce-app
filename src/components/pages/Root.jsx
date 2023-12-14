@@ -10,9 +10,7 @@ const Root = () => {
       <main
         style={{
           backgroundColor: `${defaultTheme.colors.lightGray}`,
-          // paddingBottom: "30px",
-          // margin: "0",
-          minHeight: '50vh',
+          minHeight: '60vh',
         }}
       >
         <Outlet />

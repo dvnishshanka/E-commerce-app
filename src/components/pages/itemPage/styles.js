@@ -7,7 +7,8 @@ export const Container = styled.div`
   padding: 40px;
 `;
 export const Image = styled.img`
-  width: 20%;
+  max-width: 30%;
+  object-fit: contain;
 `;
 
 export const ItemInfo = styled.div`
@@ -15,9 +16,13 @@ export const ItemInfo = styled.div`
   padding: 40px;
 `;
 
-export const Title = styled.h2``;
+export const Title = styled.h2`
+  margin-bottom: 20px;
+`;
 
-export const Description = styled.div``;
+export const Description = styled.div`
+  margin-bottom: 20px;
+`;
 
 export const Price = styled.h3``;
 
@@ -27,15 +32,16 @@ export const DiscountedPrice = styled.h3`
 `;
 
 export const OriginalPriceWrapper = styled.p`
-margin-top: 0;
-`
+  margin-top: 0;
+`;
 export const OriginalPrice = styled.span`
-text-decoration: line-through;
-`
+  text-decoration: line-through;
+`;
 
 export const Rating = styled.div`
   display: flex;
   align-items: center;
+  margin-top: 20px;
 `;
 
 export const RatingCount = styled.p`

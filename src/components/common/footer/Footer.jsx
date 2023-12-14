@@ -12,6 +12,7 @@ import {
   FacebookFilled,
   SkypeFilled,
 } from '@ant-design/icons';
+import defaultTheme from '../../../theme';
 
 const Footer = () => {
   const items = useSelector((state) => state.items);
@@ -19,6 +20,7 @@ const Footer = () => {
 
   const socialMediaStyles = {
     paddingRight: '15px',
+    marginTop: '10px',
     fontSize: '25px',
   };
 
@@ -27,30 +29,40 @@ const Footer = () => {
   return (
     <FooterContainer>
       <InfoColumn style={{ flex: '1.5' }}>
-          <Logo style={{ marginTop: '0', color: "red" }} />
+        <Logo color={defaultTheme.colors.lightGray} />
         <p style={{ paddingRight: '50px' }}>
           Explore our wide range of products and discover the perfect fit for your needs. Shop with
           confidence, backed by our quality guarantee. Join our community today and experience the
           convenience of seamless online shopping. Your satisfaction is our priority!
         </p>
         <SocialMedia>
-          <FacebookFilled style={socialMediaStyles} className={styles.socialMedia} />
-          <SkypeFilled className={styles.socialMedia} style={socialMediaStyles} />
-          <InstagramFilled style={socialMediaStyles} className={styles.socialMedia} />
+          <a href="https://github.com/dvnishshanka">
+            <FacebookFilled style={socialMediaStyles} className={styles.socialMedia} />
+          </a>
+          <a href="https://github.com/dvnishshanka">
+            <SkypeFilled className={styles.socialMedia} style={socialMediaStyles} />
+          </a>
+          <a href="https://github.com/dvnishshanka">
+            <InstagramFilled style={socialMediaStyles} className={styles.socialMedia} />
+          </a>
         </SocialMedia>
       </InfoColumn>
-      <InfoColumn >
+      <InfoColumn>
         <Title> PRODUCTS</Title>
         <ul style={listStyles}>
           {allCategories.map((category, index) => {
             return (
               <li key={index}>
-                <NavLink to={`/${category}`} style={{textDecoration: "none"}}>{category}</NavLink>
+                <NavLink to={`/${category}`} style={{ textDecoration: 'none' }}>
+                  {category}
+                </NavLink>
               </li>
             );
           })}
           <li key="sale">
-            <NavLink to={`/sale`} style={{textDecoration: "none"}}>Sale %</NavLink>
+            <NavLink to={`/sale`} style={{ textDecoration: 'none' }}>
+              Sale %
+            </NavLink>
           </li>
         </ul>
       </InfoColumn>

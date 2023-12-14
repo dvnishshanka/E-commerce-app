@@ -2,9 +2,9 @@ import defaultTheme from '../../../theme';
 import { Logo } from './styles';
 import { ShoppingTwoTone } from '@ant-design/icons';
 
-const CompanyLogo = () => {
+const CompanyLogo = ({ color = defaultTheme.colors.black }) => {
   return (
-    <Logo>
+    <Logo $color={color}>
       <ShoppingTwoTone twoToneColor={defaultTheme.colors.yellow} style={{ fontSize: '1.6rem' }} />
       FlexiCart
     </Logo>

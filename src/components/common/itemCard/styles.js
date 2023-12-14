@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 
 export const Image = styled.img`
-  max-width: 100%;
-  max-height: 95%;
+  width: 100%;
   margin: auto;
   display: block;
 `;
@@ -18,15 +17,18 @@ export const ItemDescription = styled.div`
 `;
 
 export const ItemTitle = styled.h4`
-font-weight: 500;
-`
+  font-weight: 500;
+  margin-bottom: 5px;
+`;
+
 export const FinalPrice = styled.p`
-font-weight: bold;
-margin-bottom: 0;
-`
+  font-weight: bold;
+  margin-bottom: 0;
+`;
+
 export const OriginalPriceWrapper = styled.p`
-margin-top: 0;
-`
+  margin-top: 0;
+`;
 export const OriginalPrice = styled.span`
-text-decoration: line-through;
-`
+  text-decoration: line-through;
+`;

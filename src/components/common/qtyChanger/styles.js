@@ -1,10 +1,10 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  // background-color: #1677ff;
+  justify-content: space-between;
   border-radius: 32px;
-  width: 100%;
+  width: 200px;
+  margin-top: 20px;
 `;

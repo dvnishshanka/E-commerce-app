@@ -5,20 +5,40 @@ export const Wrapper = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
+  padding: 0;
+  height: 250px;
+  overflow: hidden;
+`;
+
+export const ImageWrapper = styled.div`
+  width: 30%;
+  height: 100%;
+  margin-right: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const Image = styled.img`
   max-width: 100%;
   max-height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
 `;
 
 export const ItemDescription = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  width: 80%;
+  width: 40%;
   bottom: 5%;
+`;
+
+export const BtnContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 40%;
 `;
 
 export const DiscountedPrice = styled.h3`

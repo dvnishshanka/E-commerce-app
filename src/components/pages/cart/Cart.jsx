@@ -7,7 +7,7 @@ import defaultTheme from './../../../theme/index';
 import { Result } from 'antd';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { calTotalDeliveryCharge } from '../../../utils';
+import { calTotalDeliveryCharge, formatPrice } from '../../../utils';
 import ResultIcon from '../../../assets/images/empty-cart.png';
 import CheckoutSuccessIcon from '../../../assets/images/checkout-success.png';
 import LoginIcon from '../../../assets/images/login.png';
@@ -101,18 +101,18 @@ const Cart = () => {
               })}
             </CartItemsWrapper>
             <CartSummary>
-              <h2>Total</h2>
+              <h2>Order Summary</h2>
               <SummaryLine>
                 <p>Sub Total</p>
-                <p>{`${Number(cartData.totalPrice).toFixed(2)} €`}</p>
+                <p>{formatPrice(cartData.totalPrice, false)}</p>
               </SummaryLine>
               <SummaryLine>
                 <p>Delivery</p>
-                <p>{`${Number(totalDeliveryCharge).toFixed(2)} €`}</p>
+                <p>{formatPrice(totalDeliveryCharge, false)}</p>
               </SummaryLine>
               <SummaryLine style={{ fontWeight: 'bold' }}>
                 <p>Total (VAT included)</p>
-                <p>{`${Number(cartData.totalPrice + totalDeliveryCharge).toFixed(2)} €`}</p>
+                <p>{formatPrice(cartData.totalPrice + totalDeliveryCharge, false)}</p>
               </SummaryLine>
               <PrimaryBtn
                 style={{

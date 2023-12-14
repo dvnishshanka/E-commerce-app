@@ -1,5 +1,15 @@
 import { Card } from 'antd';
-import { ItemDescription, Image, Wrapper, OriginalPrice, OriginalPriceWrapper, DiscountedPrice, Price } from './styles';
+import {
+  ItemDescription,
+  Image,
+  Wrapper,
+  OriginalPrice,
+  OriginalPriceWrapper,
+  DiscountedPrice,
+  Price,
+  ImageWrapper,
+  BtnContainer,
+} from './styles';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { ADD_TO_CART, REMOVE_FROM_CART } from './../../../actions/ActionTypes';
@@ -37,38 +47,42 @@ const CartItemCard = ({ item }) => {
       }}
     >
       <Wrapper>
-        <Link
-          to={`/items/${item?.id}`}
-          style={{ maxWidth: '20%', maxHeight: '100%', marginRight: '30px' }}
-        >
-          <Image src={item?.image} alt={item?.title} />
-        </Link>
+        <ImageWrapper>
+          <Link to={`/items/${item?.id}`}>
+            <Image src={item?.image} alt={item?.title} />
+          </Link>
+        </ImageWrapper>
         <ItemDescription>
           {item.title && <h4>{item.title}</h4>}
           {item.category && <p style={{ margin: 0 }}>{item.category}</p>}
-          { item.discountRate > 0 ?
-            <><DiscountedPrice>
-              {formatPrice(calFinalPrice(item.price, item.discountRate))} / item
-            </DiscountedPrice>
-           <OriginalPriceWrapper>
-              Originally:
-              <OriginalPrice>
-                {formatPrice(item.price)}
-                 <DiscountTag description={`${item.discountRate}% OFF`}/>
-              </OriginalPrice>
-            </OriginalPriceWrapper></>
-            : <Price>{formatPrice(item.price)} / item</Price>}
+          {item.discountRate > 0 ? (
+            <>
+              <DiscountedPrice>
+                {formatPrice(calFinalPrice(item.price, item.discountRate))} / item
+              </DiscountedPrice>
+              <OriginalPriceWrapper>
+                Originally:
+                <OriginalPrice>
+                  {formatPrice(item.price)}
+                  <DiscountTag description={`${item.discountRate}% OFF`} />
+                </OriginalPrice>
+              </OriginalPriceWrapper>
+            </>
+          ) : (
+            <Price>{formatPrice(item.price)} / item</Price>
+          )}
+        </ItemDescription>
+        <BtnContainer>
           {noOfItems > 0 ? (
             <QtyChanger
               removeFromCartHandler={removeFromCartHandler}
               addToCartHandler={addToCartHandler}
               noOfItems={noOfItems}
-              style={{ width: '200px' }}
             />
           ) : (
-            <BtnAddCart addToCartHandler={addToCartHandler} style={{ width: '50%' }} />
+            <BtnAddCart addToCartHandler={addToCartHandler} />
           )}
-        </ItemDescription>
+        </BtnContainer>
       </Wrapper>
     </Card>
   );
